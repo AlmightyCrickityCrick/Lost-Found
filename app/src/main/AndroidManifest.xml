@@ -13,7 +13,9 @@
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:theme="@style/NoActionBarTheme"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize"
+        />
         <activity
             android:name=".MainActivity"
             android:exported="true" >

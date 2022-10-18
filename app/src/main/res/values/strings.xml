@@ -14,4 +14,10 @@
     <string name="or">or</string>
     <string name="new_user">New user?</string>
     <string name="create_new_account">Create new account</string>
+    <string name="hey">Hey!</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
 </resources>

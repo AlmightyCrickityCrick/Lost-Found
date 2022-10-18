@@ -18,16 +18,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        android:text="@string/welcome"
+        android:text="@string/hey"
         android:textColor="?textColorNormal"
         android:textSize="48sp"
-        android:padding="5dp"
         android:fontFamily="@font/montserrat"
-        />
+        android:padding="5dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in_to_continue"
+        android:text="@string/create_a_new_account"
         android:textColor="?textColorNormal"
         android:textSize="16sp"
         android:fontFamily="@font/montserrat"
@@ -42,18 +41,18 @@
         app:boxStrokeColor="?accentColor"
         app:startIconDrawable="@mipmap/mail36"
         app:startIconTint="?textColorDark"
+        app:endIconTint="?textColorDark"
+
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:fontFamily="@font/montserrat"
-
             android:autofillHints="@string/prompt_email"
+            android:fontFamily="@font/montserrat"
             android:hint="@string/prompt_email"
             android:textColor="?textColorDark"
-
             android:textColorHint="@color/black"
             android:backgroundTint="?inputColor"
             android:inputType="textEmailAddress"
@@ -70,7 +69,6 @@
         app:hintTextColor="?accentColor"
         app:boxStrokeColor="?accentColor"
         app:startIconDrawable="@mipmap/pass36"
-        app:endIconMode="password_toggle"
         app:startIconTint="?textColorDark"
         app:endIconTint="?textColorDark"
         >
@@ -79,6 +77,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat"
+
             android:autofillHints="@string/prompt_password"
             android:hint="@string/prompt_password"
             android:textColorHint="?textColorDark"
@@ -87,33 +87,51 @@
             android:imeActionLabel="@string/action_sign_in_short"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
-            android:fontFamily="@font/montserrat"
-
             android:selectAllOnFocus="true"/>
     </com.google.android.material.textfield.TextInputLayout>
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/forgot_password"
-        android:textColorHint="?textColorNormal"
-        android:textAlignment="textEnd"
-        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="15dp"
+        android:textColorHint="?textColorDark"
+        app:hintTextColor="?accentColor"
+        app:boxStrokeColor="?accentColor"
+        app:startIconDrawable="@mipmap/pass36"
+        app:startIconTint="?textColorDark"
+        app:endIconTint="?textColorDark"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat"
 
-        />
+            android:autofillHints="@string/confirm_password"
+            android:hint="@string/confirm_password"
+            android:textColorHint="?textColorDark"
+            android:textColor="?textColorDark"
+            android:backgroundTint="?inputColor"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/signup"
         android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minWidth="275dp"
-        android:minHeight="50dp"
-        android:fontFamily="@font/montserrat"
+        android:minHeight="60dp"
         android:backgroundTint="?accentColor"
         android:textColor="?textColorLight"
+        android:fontFamily="@font/montserrat"
+
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:text="@string/action_sign_in"
+        android:layout_marginTop="15dp"
+        android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,8 +152,8 @@
             android:layout_height="wrap_content"
             android:text="@string/or"
             android:textSize="16sp"
-            android:textColor="?textColorNormal"
             android:fontFamily="@font/montserrat"
+            android:textColor="?textColorNormal"
             android:layout_marginHorizontal="10dp"
             />
         <TextView
@@ -157,7 +175,7 @@
             />
         <ImageView
             android:layout_width="30sp"
-            android:layout_height="30sp"
+            android:layout_height="30dp"
             android:layout_marginHorizontal="20dp"
             android:src="@mipmap/fb48"
             />
@@ -171,15 +189,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/new_user"
+            android:text="@string/already_have_an_account"
             android:fontFamily="@font/montserrat"
+
             android:textColor="?textColorNormal"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_new_account"
-            android:layout_marginLeft="5dp"
+            android:text="@string/login"
             android:fontFamily="@font/montserrat"
+            android:layout_marginLeft="5dp"
             android:textStyle="bold"
             android:textColor="?textColorNormal"/>
 
