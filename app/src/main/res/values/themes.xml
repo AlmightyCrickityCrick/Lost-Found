@@ -9,6 +9,8 @@
         <item name="textColorLight">@color/whitest</item>
         <item name="inputColor">@color/whitest</item>
         <item name="colorPrimary">@color/blue</item>
+        <item name="drawerColor">@color/whitest</item>
+        <item name="android:fontFamily">@font/montserrat</item>
 
         <!-- Secondary brand color. -->
         <!-- Status bar color. -->
@@ -24,6 +26,15 @@
         <item name="textColorLight">@color/whitest</item>
         <item name="inputColor">@color/whitest</item>
         <item name="colorPrimary">@color/blue</item>
+        <item name="drawerColor">@color/whitest</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+
+        <style name="roundedImageView" parent="">
+            <item name="cornerFamily">rounded</item>
+            <item name="cornerSize">50%</item>
+        </style>
+
+
 
 
 
