@@ -37,11 +37,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="?textColorDark"
+        android:textColorHint="?textColorNormal"
         app:hintTextColor="?accentColor"
         app:boxStrokeColor="?accentColor"
         app:startIconDrawable="@mipmap/mail36"
-        app:startIconTint="?textColorDark"
+        app:startIconTint="?textColorNormal"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username"
@@ -52,9 +52,9 @@
 
             android:autofillHints="@string/prompt_email"
             android:hint="@string/prompt_email"
-            android:textColor="?textColorDark"
+            android:textColor="?textColorNormal"
 
-            android:textColorHint="@color/black"
+            android:textColorHint="?textColorNormal"
             android:backgroundTint="?inputColor"
             android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"/>
@@ -66,13 +66,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:textColorHint="?textColorDark"
+        android:textColorHint="?textColorNormal"
         app:hintTextColor="?accentColor"
         app:boxStrokeColor="?accentColor"
         app:startIconDrawable="@mipmap/pass36"
         app:endIconMode="password_toggle"
-        app:startIconTint="?textColorDark"
-        app:endIconTint="?textColorDark"
+        app:startIconTint="?textColorNormal"
+        app:endIconTint="?textColorNormal"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
@@ -92,6 +92,7 @@
             android:selectAllOnFocus="true"/>
     </com.google.android.material.textfield.TextInputLayout>
     <TextView
+        android:paddingTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/forgot_password"

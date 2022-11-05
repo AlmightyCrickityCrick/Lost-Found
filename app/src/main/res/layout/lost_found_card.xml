@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="240dp"
     android:orientation="vertical"
     android:layout_margin="12dp"
     android:background="?backgroundColor"
@@ -39,7 +39,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/announcement_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:backgroundTint="?cardBackground">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Lorem ipsum! Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                android:paddingVertical="5dp"
                 android:textSize="14sp"
                 android:lines="6"
                 android:ellipsize="end"
@@ -66,7 +68,8 @@
                 />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp">
                 <TextView
                     android:id="@+id/announcement_comments"
                     android:layout_width="wrap_content"
@@ -89,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/start_chat"
+                    android:gravity="center_vertical"
                     app:drawableLeftCompat="@drawable/ic_ann_chat"
                     android:drawablePadding="3dp"/>
             </LinearLayout>

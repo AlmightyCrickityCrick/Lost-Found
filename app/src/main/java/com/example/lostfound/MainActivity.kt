@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         var fragment: Fragment? = null
         when(menuItem.itemId){
             R.id.nav_dashboard -> {fragment = Lost()}
+            R.id.nav_chat -> {fragment = ChatList()}
         }
         var fragmentM = supportFragmentManager
         if (fragment != null) {

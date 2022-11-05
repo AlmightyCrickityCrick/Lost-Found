@@ -14,8 +14,8 @@
         >
     <ImageView
         android:id="@+id/toolbar_menu_button"
-        android:layout_width="18dp"
-        android:layout_height="16dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_weight="0.1"
         android:src="@drawable/ic_open_drawer"/>
 
@@ -31,8 +31,8 @@
         android:gravity="center_horizontal"
         />
     <ImageView
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_weight="0.1"
         android:src="@drawable/ic_switch_ann_type"
         android:layout_marginRight="20dp"

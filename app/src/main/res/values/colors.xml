@@ -2,11 +2,14 @@
 <resources>
     <color name="navy">#20232A</color>
     <color name="wine">#A01D26</color>
-    <color name="light_grey">#ACBEBE</color>
+    <color name="light_grey">#d9d9d9</color>
     <color name="white">#F4F4EF</color>
     <color name="black">#2F2E33</color>
     <color name="blue">#5463FF</color>
+    <color name="purple">#6665DD</color>
     <color name="off_white">#ECECEC</color>
     <color name="whitest">#F5FAFA</color>
     <color name="plum">#581845</color>
+    <color name="light_black">#292C31</color>
+
 </resources>

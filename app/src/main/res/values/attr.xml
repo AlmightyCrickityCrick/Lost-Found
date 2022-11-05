@@ -8,4 +8,6 @@
     <attr name="colorDetails" format="color"/>
     <attr name="inputColor" format="color"/>
     <attr name="drawerColor" format="color"/>
+    <attr name="cardBackground" format="color"/>
+
 </resources>
