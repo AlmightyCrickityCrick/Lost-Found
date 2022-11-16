@@ -5,10 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lostfound.data.model.Contact
+import com.example.lostfound.listeners.ContactListener
 
-class ContactAdapter(var contacts:ArrayList<Contact>) :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class ContactAdapter(var contacts:ArrayList<Contact>, var contactListener: ContactListener) :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ContactCardViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.chat_contact, parent, false))
     }
@@ -26,11 +29,13 @@ class ContactAdapter(var contacts:ArrayList<Contact>) :RecyclerView.Adapter<Recy
         var user_name:TextView
         var message:TextView
         var time:TextView
+        var card : CardView
         init {
             user_img = itemView.findViewById(R.id.chat_contact_image)
             user_name = itemView.findViewById(R.id.chat_contact_username)
             message = itemView.findViewById(R.id.chat_contact_last_message)
             time = itemView.findViewById(R.id.chat_contact_time_last_messaged)
+            card = itemView.findViewById(R.id.chat_contact_card)
         }
     }
     private fun populateItemRows(viewHolder: ContactCardViewHolder, position: Int){
@@ -39,5 +44,7 @@ class ContactAdapter(var contacts:ArrayList<Contact>) :RecyclerView.Adapter<Recy
         viewHolder.user_name.text = item.user.user_name
         viewHolder.message.text = item.last_message
         viewHolder.time.text = item.time_last_message
+        viewHolder.card.setOnClickListener{v-> contactListener.onContactClicked(item)}
+
     }
 }
