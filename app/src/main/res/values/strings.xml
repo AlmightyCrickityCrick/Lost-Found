@@ -12,6 +12,8 @@
     <string name="sign_in_to_continue">Sign in to continue</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="or">or</string>
+    <string name="lost">Lost</string>
+    <string name="found">Found</string>
     <string name="new_user">New user?</string>
     <string name="create_new_account">Create new account</string>
     <string name="hey">Hey!</string>
@@ -34,4 +36,7 @@
     <string name="start_chat">Start Chat</string>
     <string name="have_you_lost_something">Have you lost something?</string>
     <string name="do_you_want_to_find_someone">Do you want to find someone?</string>
+    <string name="add">+</string>
+    <string name="title">Title</string>
+    <string name="details">Details</string>
 </resources>

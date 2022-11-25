@@ -1,4 +1,4 @@
-package com.example.lostfound
+package com.example.lostfound.activities
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lostfound.R
+import com.example.lostfound.adapters.ContactAdapter
 import com.example.lostfound.data.DebugConstants
 import com.example.lostfound.data.model.Contact
 import com.example.lostfound.listeners.ContactListener
@@ -25,7 +27,7 @@ class ChatList : Fragment(), ContactListener{
     private var param1: String? = null
     private var param2: String? = null
     lateinit var recyclerView: RecyclerView
-    lateinit var adapter:ContactAdapter
+    lateinit var adapter: ContactAdapter
     var contacts = DebugConstants.getContacts()
 
 

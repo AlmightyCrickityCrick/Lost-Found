@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?backgroundColor"
-    tools:context=".Lost">
-    <LinearLayout
+    tools:context=".activities.Lost">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -19,7 +19,8 @@
         android:id="@+id/search_space"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
         <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,6 +63,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/search_space"
         />
-    </LinearLayout>
+        <Button
+            android:id="@+id/btn_dashboard_add_announcement"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/shape_add_button"
+            android:text="@string/add"
+            android:textSize="22sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.example.lostfound
+package com.example.lostfound.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,11 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 
-import androidx.annotation.NonNull
-
-import android.widget.ProgressBar
-
 import android.widget.TextView
+import com.example.lostfound.R
 
 class AnnouncementRecyclerViewAdapter(var ann:ArrayList<Announcement>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

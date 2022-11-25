@@ -1,4 +1,4 @@
-package com.example.lostfound
+package com.example.lostfound.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import com.example.lostfound.R
 import com.example.lostfound.databinding.ActivityMainBinding
 import com.example.lostfound.ui.login.LoginActivity
 import com.google.android.material.navigation.NavigationView
@@ -38,8 +38,10 @@ class MainActivity : AppCompatActivity() {
     fun selectDrawerItem(menuItem: MenuItem){
         var fragment: Fragment? = null
         when(menuItem.itemId){
-            R.id.nav_dashboard -> {fragment = Lost()}
-            R.id.nav_chat -> {fragment = ChatList()}
+            R.id.nav_dashboard -> {fragment = Lost()
+            }
+            R.id.nav_chat -> {fragment = ChatList()
+            }
         }
         var fragmentM = supportFragmentManager
         if (fragment != null) {

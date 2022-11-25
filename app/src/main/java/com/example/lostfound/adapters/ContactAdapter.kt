@@ -1,4 +1,4 @@
-package com.example.lostfound
+package com.example.lostfound.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lostfound.R
 import com.example.lostfound.data.model.Contact
 import com.example.lostfound.listeners.ContactListener
 

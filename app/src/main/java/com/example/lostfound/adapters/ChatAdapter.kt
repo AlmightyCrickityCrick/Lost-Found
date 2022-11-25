@@ -1,17 +1,13 @@
-package com.example.lostfound
+package com.example.lostfound.adapters
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lostfound.R
 import com.example.lostfound.data.model.ChatMessage
-import com.example.lostfound.data.model.Contact
-import com.example.lostfound.databinding.ItemContainerSentMessageBinding
-import com.example.lostfound.listeners.ContactListener
-import com.google.android.material.imageview.ShapeableImageView
 
 class ChatAdapter(var messages:ArrayList<ChatMessage>, var receiverProfileImage: Int, var senderId:Int) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -19,7 +15,8 @@ class ChatAdapter(var messages:ArrayList<ChatMessage>, var receiverProfileImage:
     val VIEW_TYPE_RECEIVED= 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == VIEW_TYPE_SENT) return SentMessageViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_container_sent_message, parent, false))
+        if (viewType == VIEW_TYPE_SENT) return SentMessageViewHolder(LayoutInflater.from(parent.context).inflate(
+            R.layout.item_container_sent_message, parent, false))
         else return ReceivedMessageViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_container_received_message, parent, false))
     }
 
