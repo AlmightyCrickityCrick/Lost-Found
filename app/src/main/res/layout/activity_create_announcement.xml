@@ -46,4 +46,127 @@
         android:gravity="start"
         android:padding="10dp"
         />
+    <Button
+        android:id="@+id/btn_ann_add_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/details_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="25dp"
+        android:text="Upload Image"/>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_ann_add_pic"
+        android:layout_marginHorizontal="25dp"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Announcement Type"
+            android:textColor="?textColorNormal"
+            android:layout_marginBottom="7dp"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:button="@color/white"
+                android:background="@drawable/radio_selector"
+                android:text="@string/found"
+                android:textColor="@drawable/radio_text_selector"
+                android:checked="true"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="0dp"
+                android:layout_marginRight="12dp"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:button="@color/white"
+                android:background="@drawable/radio_selector"
+                android:text="@string/lost"
+                android:textColor="@drawable/radio_text_selector"
+                android:checked="false"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="0dp"
+                />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textColor="?textColorNormal"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:button="@color/white"
+                android:background="@drawable/radio_selector"
+                android:text="Your location"
+                android:textColor="@drawable/radio_text_selector"
+                android:checked="false"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="0dp"
+                android:layout_marginRight="12dp"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:button="@color/white"
+                android:background="@drawable/radio_selector"
+                android:text="Choose a location"
+                android:textColor="@drawable/radio_text_selector"
+                android:checked="true"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="0dp"
+                />
+        </RadioGroup>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Tags"
+            android:paddingVertical="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:button="@color/white"
+            android:background="@drawable/radio_selector"
+            android:text="Wallet"
+            android:textColor="@drawable/radio_text_selector"
+            android:checked="true"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="0dp"
+            android:layout_marginRight="12dp"
+            />
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:button="@color/white"
+            android:background="@drawable/radio_selector"
+            android:text="+"
+            android:textColor="@drawable/radio_text_selector"
+            android:checked="true"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="0dp"
+            android:layout_marginRight="12dp"
+            />
+        </LinearLayout>
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
