@@ -11,7 +11,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:ignore="UselessParent">
-    <include layout="@layout/dashboard_toolbar"
+    <include
+        android:id="@+id/ann_dash_toolbar"
+        layout="@layout/dashboard_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -20,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/ann_dash_toolbar">
         <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,6 +77,7 @@
             android:textSize="22sp"
             android:layout_marginBottom="30dp"
             android:layout_marginRight="30dp"
+            android:textColor="?textColorLight"
             app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

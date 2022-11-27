@@ -1,4 +1,4 @@
-package com.example.lostfound.ui.login
+package com.example.lostfound.activities
 
 import android.app.Activity
 import androidx.lifecycle.Observer
@@ -15,6 +15,9 @@ import android.widget.Toast
 import com.example.lostfound.databinding.ActivityLoginBinding
 
 import com.example.lostfound.R
+import com.example.lostfound.ui.login.LoggedInUserView
+import com.example.lostfound.ui.login.LoginViewModel
+import com.example.lostfound.ui.login.LoginViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
 

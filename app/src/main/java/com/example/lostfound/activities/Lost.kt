@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lostfound.R
 import com.example.lostfound.adapters.AnnouncementRecyclerViewAdapter
 import com.example.lostfound.data.DebugConstants
-import com.example.lostfound.ui.login.LoginActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,8 +49,8 @@ class Lost : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.announcement_view)
-        toolbar = view.findViewById(R.id.single_chat_toolbar)
-        var change_btn :Button= view.findViewById(R.id.toolbar_btn_change_ann)
+        toolbar = view.findViewById(R.id.ann_dash_toolbar)
+        var change_btn :ImageButton= view.findViewById(R.id.toolbar_btn_change_ann)
         change_btn.setOnClickListener {
             modifyState()
 

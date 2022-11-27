@@ -7,8 +7,8 @@ import android.view.MenuItem
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.lostfound.R
+import com.example.lostfound.activities.LoginActivity
 import com.example.lostfound.databinding.ActivityMainBinding
-import com.example.lostfound.ui.login.LoginActivity
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {

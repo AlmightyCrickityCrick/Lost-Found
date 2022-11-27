@@ -1,0 +1,188 @@
+"""Projects main Query class, this will inherit multiple queries."""
+type Query {
+  users: [UserType]
+  user(id: Int): UserType
+  me: UserType
+  foundAnnouncement: [AnnouncementType]
+  foundAnnSearch(search: String): [AnnouncementType]
+  lostAnnouncement: [AnnouncementType]
+  chats: [ChatSystem]
+  messages: [MessageType]
+  comments: [CommentType]
+}
+
+type UserType {
+  id: ID!
+  lastLogin: DateTime
+  firstName: String!
+  lastName: String!
+  email: String!
+
+  """
+  Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+  """
+  isActive: Boolean!
+}
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
+type AnnouncementType {
+  usrId: Int!
+  location: String!
+  image: String!
+  annType: String!
+  content: String!
+  reward: Int!
+}
+
+type ChatSystem {
+  id: ID!
+  registerDate: DateTime!
+  closeDate: DateTime!
+}
+
+type MessageType {
+  id: ID!
+  isRead: Boolean!
+  content: String!
+}
+
+type CommentType {
+  id: ID!
+  content: String!
+}
+
+"""
+Projects main Mutation class, this will 
+inherit multiple mutations.
+"""
+type Mutation {
+  """
+  Create a user mutation.
+  Attributes for the class define the mutation response.
+  """
+  createUser(password: String!, username: String!): CreateUser
+
+  """Obtain JSON Web Token mutation"""
+  login(username: String!, password: String!): ObtainJSONWebToken
+  verifyToken(token: String): Verify
+  refreshToken(token: String): Refresh
+  createNewAnnouncement(annType: String!, content: String!, image: Upload, location: String!, reward: Int, userId: Int!): CreateFoundAnnouncement
+  updateAnnouncement(annId: Int!, content: String!, image: Upload, location: String!, reward: Int): UpdateFoundAnnouncement
+  deleteAnnouncement(annId: Int!): DeleteFoundAnnouncement
+  createChat(userId: Int!): CreateChat
+  updateChat(chatId: Int!): UpdateChat
+  createComment(announcementId: Int!, content: String!, userId: Int!): CreateComment
+  editComment(commentId: Int!, content: String!): EditComment
+  deleteComment(commentId: Int!): DeleteComment
+  createMessage(chatId: Int!, content: String!, senderId: Int!): CreateMessage
+  editMessage(content: String!, messageId: Int!): EditMessage
+  deleteMessage(messageId: Int!): DeleteMessage
+}
+
+"""
+Create a user mutation.
+Attributes for the class define the mutation response.
+"""
+type CreateUser {
+  id: ID
+  email: String
+  firstName: String
+  lastName: String
+}
+
+"""Obtain JSON Web Token mutation"""
+type ObtainJSONWebToken {
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+}
+
+"""
+The `GenericScalar` scalar type represents a generic
+GraphQL scalar value that could be:
+String, Boolean, Int, Float, List or Object.
+"""
+scalar GenericScalar
+
+type Verify {
+  payload: GenericScalar!
+}
+
+type Refresh {
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+}
+
+type CreateFoundAnnouncement {
+  id: ID
+  announce: AnnouncementType
+}
+
+"""
+Create scalar that ignores normal serialization/deserialization, since
+that will be handled by the multipart request spec
+"""
+scalar Upload
+
+type UpdateFoundAnnouncement {
+  id: ID
+  announce: AnnouncementType
+}
+
+type DeleteFoundAnnouncement {
+  id: ID
+  announce: AnnouncementType
+}
+
+type CreateChat {
+  id: ID
+  chat: ChatSystem
+}
+
+type UpdateChat {
+  id: ID
+  announce: ChatSystem
+}
+
+type CreateComment {
+  id: ID
+  comment: CommentType
+}
+
+type EditComment {
+  id: ID
+  content: String
+  comment: CommentType
+}
+
+type DeleteComment {
+  msg: String
+  comment: CommentType
+}
+
+type CreateMessage {
+  id: ID
+  message: MessageType
+}
+
+type EditMessage {
+  content: String
+  message: MessageType
+}
+
+type DeleteMessage {
+  msg: String
+  message: MessageType
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
