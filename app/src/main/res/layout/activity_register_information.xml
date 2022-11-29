@@ -12,22 +12,22 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activities.LoginActivity">
+    tools:context=".activities.RegisterInformationActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:text="@string/welcome"
+        android:layout_marginTop="60dp"
+        android:text="@string/good_job"
         android:textColor="?textColorNormal"
         android:textSize="48sp"
-        android:padding="5dp"
+        android:textStyle="bold"
         android:fontFamily="@font/montserrat"
-        />
+        android:padding="5dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in_to_continue"
+        android:text="@string/now_complete_your_profile"
         android:textColor="?textColorNormal"
         android:textSize="16sp"
         android:fontFamily="@font/montserrat"
@@ -40,23 +40,23 @@
         android:textColorHint="?textColorNormal"
         app:hintTextColor="?accentColor"
         app:boxStrokeColor="?accentColor"
-        app:startIconDrawable="@mipmap/mail36"
+        app:startIconDrawable="@mipmap/account"
         app:startIconTint="?textColorNormal"
+        app:endIconTint="?textColorNormal"
+
         >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
+            android:id="@+id/first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="60dp"
+            android:autofillHints="@string/first_name"
             android:fontFamily="@font/montserrat"
-
-            android:autofillHints="@string/prompt_email"
-            android:hint="@string/prompt_email"
+            android:hint="@string/first_name"
             android:textColor="?textColorNormal"
-
-            android:textColorHint="?textColorNormal"
+            android:textColorHint="@color/black"
             android:backgroundTint="?inputColor"
-            android:inputType="textEmailAddress"
+            android:inputType="textPersonName"
             android:selectAllOnFocus="true"/>
     </com.google.android.material.textfield.TextInputLayout>
     <!--        app:layout_constraintEnd_toEndOf="parent"-->
@@ -69,123 +69,92 @@
         android:textColorHint="?textColorNormal"
         app:hintTextColor="?accentColor"
         app:boxStrokeColor="?accentColor"
-        app:startIconDrawable="@mipmap/pass36"
-        app:endIconMode="password_toggle"
+        app:startIconDrawable="@mipmap/account"
         app:startIconTint="?textColorNormal"
-        app:endIconTint="?textColorNormal"
         >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
+            android:id="@+id/last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:autofillHints="@string/prompt_password"
-            android:hint="@string/prompt_password"
+            android:fontFamily="@font/montserrat"
+
+            android:autofillHints="@string/last_name"
+            android:hint="@string/last_name"
             android:textColorHint="?textColorNormal"
             android:textColor="?textColorNormal"
             android:backgroundTint="?inputColor"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:fontFamily="@font/montserrat"
-
+            android:inputType="textPersonName"
             android:selectAllOnFocus="true"/>
     </com.google.android.material.textfield.TextInputLayout>
-    <TextView
-        android:paddingTop="5dp"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/forgot_password"
+        android:layout_marginTop="15dp"
         android:textColorHint="?textColorNormal"
-        android:textAlignment="textEnd"
-        android:fontFamily="@font/montserrat"
-
-        />
-
+        app:hintTextColor="?accentColor"
+        app:boxStrokeColor="?accentColor"
+        app:startIconDrawable="@mipmap/ic_calendar"
+        app:startIconTint="?textColorNormal"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/date_of_birth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat"
+            android:autofillHints="@string/dd_mm_yyyy"
+            android:hint="@string/dd_mm_yyyy"
+            android:textColorHint="?textColorNormal"
+            android:textColor="?textColorNormal"
+            android:backgroundTint="?inputColor"
+            android:inputType="date"
+            android:selectAllOnFocus="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColorHint="?textColorNormal"
+        app:hintTextColor="?accentColor"
+        app:boxStrokeColor="?accentColor"
+        app:startIconDrawable="@mipmap/ic_calendar"
+        app:startIconTint="?textColorNormal"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat"
+            android:autofillHints="@string/phone_number"
+            android:hint="@string/phone_number"
+            android:textColorHint="?textColorNormal"
+            android:textColor="?textColorNormal"
+            android:backgroundTint="?inputColor"
+            android:inputType="phone"
+            android:selectAllOnFocus="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
     <Button
-        android:id="@+id/login"
+        android:id="@+id/create_acc"
         android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minWidth="275dp"
-        android:minHeight="50dp"
-        android:fontFamily="@font/montserrat"
+        android:minHeight="60dp"
         android:backgroundTint="?accentColor"
         android:textColor="?textColorLight"
+        android:fontFamily="@font/montserrat"
+
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:text="@string/action_sign_in"
+        android:layout_marginTop="15dp"
+        android:text="@string/create_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:layout_constraintVertical_bias="0.2" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:gravity="center">
-        <TextView
-            android:layout_width="125dp"
-            android:layout_height="1dp"
-            android:background="?textColorNormal"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/or"
-            android:textSize="16sp"
-            android:textColor="?textColorNormal"
-            android:fontFamily="@font/montserrat"
-            android:layout_marginHorizontal="10dp"
-            />
-        <TextView
-            android:layout_width="125dp"
-            android:layout_height="1dp"
-            android:background="?textColorNormal"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="15dp">
-        <ImageView
-            android:layout_width="30sp"
-            android:layout_height="30dp"
-            android:layout_marginHorizontal="20dp"
-            android:src="@mipmap/g64"
-            />
-        <ImageView
-            android:layout_width="30sp"
-            android:layout_height="30sp"
-            android:layout_marginHorizontal="20dp"
-            android:src="@mipmap/fb48"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/btn_to_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/new_user"
-            android:fontFamily="@font/montserrat"
-            android:textColor="?textColorNormal"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/create_new_account"
-            android:layout_marginLeft="5dp"
-            android:fontFamily="@font/montserrat"
-            android:textStyle="bold"
-            android:textColor="?textColorNormal"/>
-
-    </LinearLayout>
 
 
     <ProgressBar

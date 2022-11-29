@@ -1,4 +1,4 @@
-package com.example.lostfound.ui.login
+package com.example.lostfound.utils.login
 
 /**
  * User details post authentication that is exposed to the UI

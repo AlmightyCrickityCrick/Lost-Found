@@ -10,49 +10,50 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import com.example.lostfound.databinding.ActivityLoginBinding
 
 import com.example.lostfound.R
-import com.example.lostfound.utils.login.LoggedInUserView
-import com.example.lostfound.utils.login.LoginViewModel
-import com.example.lostfound.utils.login.LoginViewModelFactory
+import com.example.lostfound.databinding.ActivityRegisterBinding
 import com.example.lostfound.utils.afterTextChanged
+import com.example.lostfound.utils.login.LoggedInUserView
+import com.example.lostfound.utils.login.LoginViewModelFactory
+import com.example.lostfound.utils.register.RegisterViewModel
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var loginViewModel: LoginViewModel
-private lateinit var binding: ActivityLoginBinding
+    private lateinit var registerViewModel: RegisterViewModel
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-     binding = ActivityLoginBinding.inflate(layoutInflater)
-     setContentView(binding.root)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val username = binding.username
         val password = binding.password
-        val login = binding.login
-        val register = binding.btnToRegister
+        val passwordConfirm = binding.passwordConfirm
+        val signup = binding.signup
+        val login = binding.btnToLogin
         val loading = binding.loading
 
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
+        registerViewModel = ViewModelProvider(this, LoginViewModelFactory())
+            .get(RegisterViewModel::class.java)
 
-        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
-            val loginState = it ?: return@Observer
+        registerViewModel.registerFormState.observe(this@RegisterActivity, Observer {
+            val registerState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
-            login.isEnabled = loginState.isDataValid
+            signup.isEnabled = registerState.isDataValid
 
-            if (loginState.usernameError != null) {
-                username.error = getString(loginState.usernameError)
+            if (registerState.usernameError != null) {
+                username.error = getString(registerState.usernameError)
             }
-            if (loginState.passwordError != null) {
-               password.error = getString(loginState.passwordError)
+            if (registerState.passwordError != null) {
+                password.error = getString(registerState.passwordError)
             }
         })
 
-        loginViewModel.loginResult.observe(this@LoginActivity, Observer {
+        registerViewModel.loginResult.observe(this@RegisterActivity, Observer {
             val loginResult = it ?: return@Observer
 
             loading.visibility = View.GONE
@@ -63,13 +64,14 @@ private lateinit var binding: ActivityLoginBinding
                 updateUiWithUser(loginResult.success)
             }
             setResult(Activity.RESULT_OK)
-
+            intent = Intent(this, RegisterInformationActivity::class.java)
+            startActivity(intent)
             //Complete and destroy login activity once successful
             finish()
         })
 
         username.afterTextChanged {
-            loginViewModel.loginDataChanged(
+            registerViewModel.loginDataChanged(
                 username.text.toString(),
                 password.text.toString()
             )
@@ -77,7 +79,7 @@ private lateinit var binding: ActivityLoginBinding
 
         password.apply {
             afterTextChanged {
-                loginViewModel.loginDataChanged(
+                registerViewModel.loginDataChanged(
                     username.text.toString(),
                     password.text.toString()
                 )
@@ -86,7 +88,7 @@ private lateinit var binding: ActivityLoginBinding
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
+                        registerViewModel.register(
                             username.text.toString(),
                             password.text.toString()
                         )
@@ -94,14 +96,14 @@ private lateinit var binding: ActivityLoginBinding
                 false
             }
 
-            login.setOnClickListener {
+            signup.setOnClickListener {
                 loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
+                registerViewModel.register(username.text.toString(), password.text.toString())
             }
         }
 
-        register.setOnClickListener {
-            intent = Intent(this, RegisterActivity::class.java)
+        login.setOnClickListener {
+            intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             this.finish()
         }

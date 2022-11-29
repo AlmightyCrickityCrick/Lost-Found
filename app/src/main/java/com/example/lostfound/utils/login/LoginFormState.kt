@@ -1,4 +1,4 @@
-package com.example.lostfound.ui.login
+package com.example.lostfound.utils.login
 
 /**
  * Data validation state of the login form.

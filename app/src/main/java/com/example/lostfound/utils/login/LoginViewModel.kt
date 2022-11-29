@@ -1,4 +1,4 @@
-package com.example.lostfound.ui.login
+package com.example.lostfound.utils.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

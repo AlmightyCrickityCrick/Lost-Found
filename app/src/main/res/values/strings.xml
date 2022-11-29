@@ -38,4 +38,12 @@
     <string name="do_you_want_to_find_someone">Do you want to find someone?</string>
     <string name="add">+</string>
     <string name="title">Title</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="good_job">Good job!</string>
+    <string name="now_complete_your_profile">Now, complete your profile:</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="dd_mm_yyyy">DD.MM.YYYY</string>
+    <string name="phone_number">Phone number</string>
+    <string name="create_account">Create Account</string>
 </resources>
