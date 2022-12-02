@@ -19,6 +19,7 @@ class LoginDataSource {
 
     suspend fun login(username: String, password: String): Result<LoggedInUser> {
         try {
+            print(LoginMutation(username, password))
             val response = apolloClient.mutation(LoginMutation(username, password)).execute()
             val token = response.data?.login?.token
             print(token)

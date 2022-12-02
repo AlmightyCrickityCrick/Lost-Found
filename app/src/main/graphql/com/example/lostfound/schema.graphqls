@@ -2,13 +2,17 @@
 type Query {
   users: [UserType]
   user(id: Int): UserType
-  me: UserType
-  foundAnnouncement: [AnnouncementType]
-  foundAnnSearch(search: String): [AnnouncementType]
-  lostAnnouncement: [AnnouncementType]
+  me: UserProfileType
+  userProfiles: [UserProfileType]
+  foundAnnouncements: [AnnouncementType]
+  announcementsSearchByContent(search: String): [AnnouncementType]
+  lostAnnouncements: [AnnouncementType]
   chats: [ChatSystem]
   messages: [MessageType]
   comments: [CommentType]
+  tags: [TagType]
+  announcement(id: Int): AnnouncementType
+  announcementsByTag(annType: String, tag: String): [AnnouncementType]
 }
 
 type UserType {
@@ -16,12 +20,12 @@ type UserType {
   lastLogin: DateTime
   firstName: String!
   lastName: String!
-  email: String!
 
   """
   Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
   """
   isActive: Boolean!
+  email: String!
 }
 
 """
@@ -31,19 +35,34 @@ value as specified by
 """
 scalar DateTime
 
+type UserProfileType {
+  id: ID!
+  user: UserType!
+  phone: String!
+  location: String!
+  creditDetails: String!
+  image: String!
+  rating: Int!
+  announcementSet: [AnnouncementType!]!
+  messageSet: [MessageType!]!
+  chatSet: [ChatSystem!]!
+  commentSet: [CommentType!]!
+}
+
 type AnnouncementType {
-  usrId: Int!
+  user: UserProfileType!
+  title: String!
   location: String!
   image: String!
   annType: String!
   content: String!
+  tags: [TagType!]!
   reward: Int!
 }
 
-type ChatSystem {
+type TagType {
   id: ID!
-  registerDate: DateTime!
-  closeDate: DateTime!
+  name: String!
 }
 
 type MessageType {
@@ -52,13 +71,19 @@ type MessageType {
   content: String!
 }
 
+type ChatSystem {
+  id: ID!
+  registerDate: DateTime!
+  closeDate: DateTime!
+}
+
 type CommentType {
   id: ID!
   content: String!
 }
 
 """
-Projects main Mutation class, this will 
+Projects main Mutation class, this will
 inherit multiple mutations.
 """
 type Mutation {
@@ -66,13 +91,13 @@ type Mutation {
   Create a user mutation.
   Attributes for the class define the mutation response.
   """
-  createUser(password: String!, username: String!): CreateUser
+  createUser(email: String!, password: String!): CreateUser
 
   """Obtain JSON Web Token mutation"""
-  login(username: String!, password: String!): ObtainJSONWebToken
+  login(email: String!, password: String!): ObtainJSONWebToken
   verifyToken(token: String): Verify
   refreshToken(token: String): Refresh
-  createNewAnnouncement(annType: String!, content: String!, image: Upload, location: String!, reward: Int, userId: Int!): CreateFoundAnnouncement
+  createNewAnnouncement(annType: String!, content: String!, image: Upload, location: String!, reward: Int, tag: String!, title: String!, userId: Int!): CreateAnnouncement
   updateAnnouncement(annId: Int!, content: String!, image: Upload, location: String!, reward: Int): UpdateFoundAnnouncement
   deleteAnnouncement(annId: Int!): DeleteFoundAnnouncement
   createChat(userId: Int!): CreateChat
@@ -83,6 +108,7 @@ type Mutation {
   createMessage(chatId: Int!, content: String!, senderId: Int!): CreateMessage
   editMessage(content: String!, messageId: Int!): EditMessage
   deleteMessage(messageId: Int!): DeleteMessage
+  createTags(tagList: [String]!): CreateTags
 }
 
 """
@@ -91,9 +117,6 @@ Attributes for the class define the mutation response.
 """
 type CreateUser {
   id: ID
-  email: String
-  firstName: String
-  lastName: String
 }
 
 """Obtain JSON Web Token mutation"""
@@ -120,7 +143,7 @@ type Refresh {
   token: String!
 }
 
-type CreateFoundAnnouncement {
+type CreateAnnouncement {
   id: ID
   announce: AnnouncementType
 }
@@ -182,6 +205,10 @@ type DeleteMessage {
   message: MessageType
 }
 
+type CreateTags {
+  msg: String
+  tag: TagType
+}
 schema {
   query: Query
   mutation: Mutation
