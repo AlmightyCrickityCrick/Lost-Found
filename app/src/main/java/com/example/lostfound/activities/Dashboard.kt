@@ -11,6 +11,9 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lostfound.R
+import com.example.lostfound.activities.dashboard_states.DashboardState
+import com.example.lostfound.activities.dashboard_states.FoundState
+import com.example.lostfound.activities.dashboard_states.LostState
 import com.example.lostfound.adapters.AnnouncementRecyclerViewAdapter
 import com.example.lostfound.data.DebugConstants
 
@@ -19,12 +22,12 @@ import com.example.lostfound.data.DebugConstants
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class Lost : Fragment() {
+class Dashboard : Fragment() {
     lateinit var recyclerView:RecyclerView
     lateinit var adapter: AnnouncementRecyclerViewAdapter
     var annArray= DebugConstants.getAnnouncements()
     lateinit var toolbar:androidx.appcompat.widget.Toolbar
-    var state = 0
+    lateinit var state :DashboardState
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -50,6 +53,7 @@ class Lost : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.announcement_view)
         toolbar = view.findViewById(R.id.ann_dash_toolbar)
+        state = LostState(this)
         var change_btn :ImageButton= view.findViewById(R.id.toolbar_btn_change_ann)
         change_btn.setOnClickListener {
             modifyState()
@@ -67,16 +71,11 @@ class Lost : Fragment() {
 
     }
     private fun modifyState(){
-        if(this.state == 0) {
-            this.state = 1
-            var name :TextView= toolbar.findViewById(R.id.toolbar_fragment_name)
-            name.setText(R.string.found)
-
+        if(this.state.type == 0) {
+            this.state = FoundState(this)
         }
         else {
-            this.state = 0
-            var name :TextView= toolbar.findViewById(R.id.toolbar_fragment_name)
-            name.setText(R.string.lost)
+            this.state = LostState(this)
         }
     }
     private fun initAdapter() {
@@ -96,7 +95,7 @@ class Lost : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Lost().apply {
+            Dashboard().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

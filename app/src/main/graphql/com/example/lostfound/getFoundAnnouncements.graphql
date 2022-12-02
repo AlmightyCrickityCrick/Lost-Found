@@ -1,0 +1,19 @@
+query getFoundAnnouncements{
+    foundAnnouncements{
+        user{
+            id,
+            user{
+                firstName,
+                lastName
+            },
+            image,
+        },
+        title,
+        content,
+        location,
+        tags{
+            name
+        }
+
+    }
+}
