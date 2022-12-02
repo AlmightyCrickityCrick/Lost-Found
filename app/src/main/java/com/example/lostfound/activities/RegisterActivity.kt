@@ -62,12 +62,13 @@ class RegisterActivity : AppCompatActivity() {
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
+                setResult(Activity.RESULT_OK)
+                intent = Intent(this, RegisterInformationActivity::class.java)
+                startActivity(intent)
+                //Complete and destroy login activity once successful
+                finish()
             }
-            setResult(Activity.RESULT_OK)
-            intent = Intent(this, RegisterInformationActivity::class.java)
-            startActivity(intent)
-            //Complete and destroy login activity once successful
-            finish()
+
         })
 
         username.afterTextChanged {
@@ -85,16 +86,16 @@ class RegisterActivity : AppCompatActivity() {
                 )
             }
 
-            setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        registerViewModel.register(
-                            username.text.toString(),
-                            password.text.toString()
-                        )
-                }
-                false
-            }
+//            setOnEditorActionListener { _, actionId, _ ->
+//                when (actionId) {
+//                    EditorInfo.IME_ACTION_DONE ->
+//                        registerViewModel.register(
+//                            username.text.toString(),
+//                            password.text.toString()
+//                        )
+//                }
+//                false
+//            }
 
             signup.setOnClickListener {
                 loading.visibility = View.VISIBLE

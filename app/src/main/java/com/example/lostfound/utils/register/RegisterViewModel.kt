@@ -10,6 +10,7 @@ import com.example.lostfound.data.Result
 import com.example.lostfound.utils.login.LoggedInUserView
 import com.example.lostfound.utils.login.LoginFormState
 import com.example.lostfound.utils.login.LoginResult
+import kotlinx.coroutines.*
 
 class RegisterViewModel (private val loginRepository: LoginRepository) : ViewModel() {
 
@@ -19,16 +20,23 @@ class RegisterViewModel (private val loginRepository: LoginRepository) : ViewMod
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
+    @DelicateCoroutinesApi
     fun register(username: String, password: String) {
         // can be launched in a separate asynchronous job
-        val result = loginRepository.register(username, password)
-
-        if (result is Result.Success) {
-            _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+        runBlocking {
+            val job = GlobalScope.async {
+                loginRepository.register(username, password)
+            }
+            val result = job.await()
+            if (result is Result.Success) {
+                _loginResult.value =
+                    LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+            } else {
+                _loginResult.value = LoginResult(error = R.string.login_failed)
+            }
         }
-    }
+        }
+
 
     fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {
