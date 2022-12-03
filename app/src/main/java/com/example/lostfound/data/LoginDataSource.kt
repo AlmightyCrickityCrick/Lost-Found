@@ -6,6 +6,7 @@ import com.example.lostfound.CreateUserMutation
 import com.example.lostfound.LoginMutation
 import com.example.lostfound.data.model.LoggedInUser
 import com.example.lostfound.data.model.User
+import com.example.lostfound.utils.ApolloClientService
 import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import java.io.IOException
@@ -14,15 +15,10 @@ import java.io.IOException
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 class LoginDataSource {
-    private val okHttpClient = OkHttpClient.Builder().build()
-    private val apolloClient = ApolloClient.Builder().serverUrl("http://10.0.2.2:8000/graphql/").okHttpClient(okHttpClient).build()
 
     suspend fun login(username: String, password: String): Result<LoggedInUser> {
         try {
-            print(LoginMutation(username, password))
-            val response = apolloClient.mutation(LoginMutation(username, password)).execute()
-            val token = response.data?.login?.token
-            print(token)
+            var token = ApolloClientService.login(username, password)
             if (token!=null)return Result.Success(LoggedInUser(token, username))
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))
@@ -32,10 +28,7 @@ class LoginDataSource {
 
     suspend fun register(username:String, password: String):Result<LoggedInUser>{
         try {
-            val response = apolloClient.mutation(CreateUserMutation(username, password)).execute()
-            print("Got response $response")
-            val id = response.data?.createUser?.id
-            print(id)
+            var id = ApolloClientService.register(username,password)
             if(id!=null)return Result.Success(LoggedInUser(id, username))
         } catch (e: Throwable) {
             print(e.stackTrace)

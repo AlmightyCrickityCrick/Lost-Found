@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lostfound.R
 import com.example.lostfound.activities.dashboard_states.DashboardState
@@ -16,6 +17,8 @@ import com.example.lostfound.activities.dashboard_states.FoundState
 import com.example.lostfound.activities.dashboard_states.LostState
 import com.example.lostfound.adapters.AnnouncementRecyclerViewAdapter
 import com.example.lostfound.data.DebugConstants
+import java.util.*
+import kotlin.concurrent.timerTask
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,13 +42,24 @@ class Dashboard : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+    fun updateData(){
+        var lst = annArray
+        state.getAnnouncements()
+        if(lst!=annArray){
+            updateDashboard()
+        }
+    }
+    fun updateDashboard() {
+        Toast.makeText(this.context, annArray.size.toString(), Toast.LENGTH_LONG ).show()
+        //adapter.notifyDataSetChanged()
+        initAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_lost, container, false)
     }
 
@@ -53,13 +67,14 @@ class Dashboard : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.announcement_view)
         toolbar = view.findViewById(R.id.ann_dash_toolbar)
+        initAdapter()
         state = LostState(this)
+
         var change_btn :ImageButton= view.findViewById(R.id.toolbar_btn_change_ann)
         change_btn.setOnClickListener {
             modifyState()
 
         }
-        initAdapter()
         var add_btn :Button = view.findViewById(R.id.btn_dashboard_add_announcement)
         add_btn.setOnClickListener {
             activity?.let {
@@ -68,6 +83,12 @@ class Dashboard : Fragment() {
             }
 
         }
+        var t = Timer()
+        t.scheduleAtFixedRate(
+            timerTask {
+                updateData()
+            }
+            , 600000, 600000)
 
     }
     private fun modifyState(){
