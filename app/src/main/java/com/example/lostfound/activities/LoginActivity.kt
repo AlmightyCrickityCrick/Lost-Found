@@ -17,11 +17,14 @@ import com.example.lostfound.utils.login.LoggedInUserView
 import com.example.lostfound.utils.login.LoginViewModel
 import com.example.lostfound.utils.login.LoginViewModelFactory
 import com.example.lostfound.utils.afterTextChanged
+import kotlinx.coroutines.DelicateCoroutinesApi
 
+@DelicateCoroutinesApi
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
 private lateinit var binding: ActivityLoginBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,11 +64,16 @@ private lateinit var binding: ActivityLoginBinding
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
+                var user = loginViewModel.getUserFromRepository()
+                if(user!=null){
+                    setResult(Activity.RESULT_OK, Intent().putExtra("USER", user))
+                    finish()
+                }
             }
-            setResult(Activity.RESULT_OK)
-
-            //Complete and destroy login activity once successful
-            finish()
+//            setResult(Activity.RESULT_OK)
+//
+//            //Complete and destroy login activity once successful
+//            finish()
         })
 
         username.afterTextChanged {

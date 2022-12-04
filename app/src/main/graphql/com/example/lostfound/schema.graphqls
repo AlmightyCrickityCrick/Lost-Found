@@ -50,6 +50,7 @@ type UserProfileType {
 }
 
 type AnnouncementType {
+  id: ID!
   user: UserProfileType!
   title: String!
   location: String!
@@ -58,6 +59,7 @@ type AnnouncementType {
   content: String!
   tags: [TagType!]!
   reward: Int!
+  passedTime: String!
 }
 
 type TagType {

@@ -1,0 +1,5 @@
+mutation CreateNewAnnouncement($annType: String!, $content: String!, $image: Upload, $location: String!, $reward: Int, $tag: String!, $title: String!, $userId: Int!){
+    createNewAnnouncement(annType: $annType, content: $content, image: $image, location: $location, reward: $reward, tag: $tag, title: $title, userId: $userId){
+        id
+    }
+}

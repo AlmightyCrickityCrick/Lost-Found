@@ -8,6 +8,7 @@ import com.example.lostfound.data.LoginRepository
 import com.example.lostfound.data.Result
 
 import com.example.lostfound.R
+import com.example.lostfound.data.model.LoggedInUser
 import kotlinx.coroutines.*
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
@@ -18,7 +19,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    @DelicateCoroutinesApi
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
         runBlocking {
@@ -32,6 +32,11 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                     _loginResult.value = LoginResult(error = R.string.login_failed)
                 }
         }
+    }
+
+    fun getUserFromRepository(): LoggedInUser? {
+        print(loginRepository.user)
+        return loginRepository.user
     }
 
     fun loginDataChanged(username: String, password: String) {

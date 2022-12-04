@@ -11,5 +11,6 @@ class CreateAnnouncementActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =  ActivityCreateAnnouncementBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
 }
