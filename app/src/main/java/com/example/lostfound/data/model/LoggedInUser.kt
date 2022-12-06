@@ -7,5 +7,10 @@ import java.io.Serializable
  */
 data class LoggedInUser(
     val userId: String,
-    val displayName: String
+    var displayName: String?=null,
+    var email :String,
+    var dateOfBirth: String?=null,
+    var img :String?=null,
+    var phone:String?=null
+
 ):Serializable

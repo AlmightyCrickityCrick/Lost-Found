@@ -1,9 +1,9 @@
 """Projects main Query class, this will inherit multiple queries."""
 type Query {
   users: [UserType]
+  userProfile(id: Int): UserProfileType
   user(id: Int): UserType
   me: UserProfileType
-  userProfiles: [UserProfileType]
   foundAnnouncements: [AnnouncementType]
   announcementsSearchByContent(search: String): [AnnouncementType]
   lostAnnouncements: [AnnouncementType]
@@ -42,12 +42,20 @@ type UserProfileType {
   location: String!
   creditDetails: String!
   image: String!
+  dateOfBirth: Date!
   rating: Int!
   announcementSet: [AnnouncementType!]!
   messageSet: [MessageType!]!
   chatSet: [ChatSystem!]!
   commentSet: [CommentType!]!
 }
+
+"""
+The `Date` scalar type represents a Date
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar Date
 
 type AnnouncementType {
   id: ID!
@@ -111,6 +119,7 @@ type Mutation {
   editMessage(content: String!, messageId: Int!): EditMessage
   deleteMessage(messageId: Int!): DeleteMessage
   createTags(tagList: [String]!): CreateTags
+  updateUserProfile(dateOfBirth: String, firstName: String, image: Upload, lastName: String, phoneNumber: String, usrId: Int!): UpdateUserProfile
 }
 
 """
@@ -210,6 +219,12 @@ type DeleteMessage {
 type CreateTags {
   msg: String
   tag: TagType
+}
+
+type UpdateUserProfile {
+  id: ID
+  dateOfBirth: String
+  phoneNumber: String
 }
 schema {
   query: Query

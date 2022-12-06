@@ -1,0 +1,8 @@
+mutation UpdateUserProfile($dateOfBirth: String, $firstName: String, $image: Upload, $lastName: String, $phoneNumber: String, $usrId: Int!)
+{
+    updateUserProfile(usrId: $usrId, dateOfBirth: $dateOfBirth, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, image: $image){
+        id,
+        phoneNumber,
+        dateOfBirth
+    }
+}

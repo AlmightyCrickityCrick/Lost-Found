@@ -1,6 +1,7 @@
 package com.example.lostfound.data
 
 import com.example.lostfound.data.model.LoggedInUser
+import java.io.IOException
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -41,6 +42,16 @@ class LoginRepository(val dataSource: LoginDataSource) {
     suspend fun register(username: String, password: String):Result<LoggedInUser>{
         val result = dataSource.register(username, password)
 
+        if (result is Result.Success) {
+            setLoggedInUser(result.data)
+        }
+
+        return result
+    }
+
+    suspend fun setUserInfo(dateOfBirth: String, firstName: String, lastName: String, phoneNumber: String):Result<LoggedInUser>{
+        val result = user?.let { dataSource.setUserInfo(it.email, dateOfBirth, firstName, lastName, phoneNumber, it.userId.toInt()) }
+            ?: return Result.Error(IOException("User doesnt exist"))
         if (result is Result.Success) {
             setLoggedInUser(result.data)
         }

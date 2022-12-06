@@ -8,7 +8,10 @@
     <string name="welcome">Welcome!</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_phone">Phone doesnt match</string>
+    <string name="invalid_date">Data must be in YYYY.MM.DD format</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="register_failed">"Register failed"</string>
     <string name="sign_in_to_continue">Sign in to continue</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="or">or</string>
@@ -43,7 +46,7 @@
     <string name="now_complete_your_profile">Now, complete your profile:</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
-    <string name="dd_mm_yyyy">DD.MM.YYYY</string>
+    <string name="dd_mm_yyyy">YYYY.MM.DD</string>
     <string name="phone_number">Phone number</string>
     <string name="create_account">Create Account</string>
 </resources>

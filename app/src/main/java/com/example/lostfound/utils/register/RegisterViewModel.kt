@@ -10,15 +10,16 @@ import com.example.lostfound.data.Result
 import com.example.lostfound.utils.login.LoggedInUserView
 import com.example.lostfound.utils.login.LoginFormState
 import com.example.lostfound.utils.login.LoginResult
+import com.example.lostfound.utils.login.LoginViewModel
 import kotlinx.coroutines.*
 
-class RegisterViewModel (private val loginRepository: LoginRepository) : ViewModel() {
+class RegisterViewModel (loginRepository: LoginRepository) : LoginViewModel(loginRepository) {
 
     private val _loginForm = MutableLiveData<RegisterFormState>()
     val registerFormState: LiveData<RegisterFormState> = _loginForm
 
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> = _loginResult
+    //override val _loginResult = MutableLiveData<LoginResult>()
+    override val loginResult: LiveData<LoginResult> = _loginResult
 
     @DelicateCoroutinesApi
     fun register(username: String, password: String) {
@@ -29,16 +30,17 @@ class RegisterViewModel (private val loginRepository: LoginRepository) : ViewMod
             }
             val result = job.await()
             if (result is Result.Success) {
-                _loginResult.value =
-                    LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
+                login(username, password)
+//                _loginResult.value =
+//                    LoginResult(success = LoggedInUserView(displayName = result.data.email))
             } else {
-                _loginResult.value = LoginResult(error = R.string.login_failed)
+                _loginResult.value = LoginResult(error = R.string.register_failed)
             }
         }
         }
 
 
-    fun loginDataChanged(username: String, password: String) {
+    override fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {
             _loginForm.value = RegisterFormState(usernameError = R.string.invalid_username)
         } else if (!isPasswordValid(password)) {

@@ -1,6 +1,7 @@
 package com.example.lostfound.utils
 
 import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.network.okHttpClient
 import com.example.lostfound.*
 import com.example.lostfound.data.model.Announcement
@@ -60,5 +61,11 @@ object ApolloClientService {
                 }
             }
         return annList
+    }
+
+    suspend fun setUserInfo(dateOfBirth: Optional<String?>, firstName: Optional<String?>, lastName: Optional<String?>, phoneNumber: Optional<String?>, usrId: Int): String? {
+        val response = apolloClient.mutation(UpdateUserProfileMutation(dateOfBirth, firstName, Optional.absent(), lastName, phoneNumber, usrId)).execute()
+        val id = response.data?.updateUserProfile?.id
+        return id
     }
 }
