@@ -71,10 +71,12 @@
             android:textColor="?textColorNormal"
             android:layout_marginBottom="7dp"/>
         <RadioGroup
+            android:id="@+id/ann_type_radio"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <RadioButton
+                android:id="@+id/ann_type_found"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:button="@color/white"
@@ -87,6 +89,7 @@
                 android:layout_marginRight="12dp"
                 />
             <RadioButton
+                android:id="@+id/ann_type_lost"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:button="@color/white"
