@@ -1,5 +1,6 @@
-package com.example.lostfound.data
+package com.example.lostfound.data.user
 
+import com.example.lostfound.data.Result
 import com.example.lostfound.data.model.LoggedInUser
 import java.io.IOException
 
@@ -39,7 +40,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
         return result
     }
 
-    suspend fun register(username: String, password: String):Result<LoggedInUser>{
+    suspend fun register(username: String, password: String): Result<LoggedInUser> {
         val result = dataSource.register(username, password)
 
         if (result is Result.Success) {
@@ -49,7 +50,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
         return result
     }
 
-    suspend fun setUserInfo(dateOfBirth: String, firstName: String, lastName: String, phoneNumber: String):Result<LoggedInUser>{
+    suspend fun setUserInfo(dateOfBirth: String, firstName: String, lastName: String, phoneNumber: String): Result<LoggedInUser> {
         val result = user?.let { dataSource.setUserInfo(it.email, dateOfBirth, firstName, lastName, phoneNumber, it.userId.toInt()) }
             ?: return Result.Error(IOException("User doesnt exist"))
         if (result is Result.Success) {
@@ -59,7 +60,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
         return result
     }
 
-    private fun setLoggedInUser(loggedInUser: LoggedInUser) {
+     fun setLoggedInUser(loggedInUser: LoggedInUser) {
         this.user = loggedInUser
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore

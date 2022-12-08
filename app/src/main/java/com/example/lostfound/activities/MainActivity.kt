@@ -24,14 +24,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =  ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result->
-            if(result.resultCode == Activity.RESULT_OK){
-                 user = result.data?.getSerializableExtra(USER_CONST) as LoggedInUser
-            }
-        }
-        var login = Intent(this, LoginActivity::class.java)
-        resultLauncher.launch(login)
-
+//        var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result->
+//            if(result.resultCode == Activity.RESULT_OK){
+//                 user = result.data?.getSerializableExtra(USER_CONST) as LoggedInUser
+//            }
+//        }
+//        var login = Intent(this, LoginActivity::class.java)
+//        resultLauncher.launch(login)
+        val user = intent.getSerializableExtra("USER") as LoggedInUser
         mDrawer =  binding.drawerLayout
         navDrawer = binding.nvDrawer
         setUpDrawerContent(navDrawer)

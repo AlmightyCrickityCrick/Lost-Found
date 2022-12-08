@@ -64,6 +64,7 @@ class RegisterActivity : AppCompatActivity() {
                 updateUiWithUser(loginResult.success)
                 setResult(Activity.RESULT_OK)
                 intent = Intent(this, RegisterInformationActivity::class.java)
+                intent.putExtra("USER", registerViewModel.getUserFromRepository())
                 startActivity(intent)
                 //Complete and destroy login activity once successful
                 finish()

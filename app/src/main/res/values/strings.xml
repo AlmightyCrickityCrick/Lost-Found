@@ -46,7 +46,7 @@
     <string name="now_complete_your_profile">Now, complete your profile:</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
-    <string name="dd_mm_yyyy">YYYY.MM.DD</string>
+    <string name="dd_mm_yyyy">YYYY-MM-DD</string>
     <string name="phone_number">Phone number</string>
     <string name="create_account">Create Account</string>
 </resources>

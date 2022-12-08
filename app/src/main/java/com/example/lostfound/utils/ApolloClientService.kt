@@ -2,15 +2,20 @@ package com.example.lostfound.utils
 
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
+import com.apollographql.apollo3.api.Upload
 import com.apollographql.apollo3.network.okHttpClient
 import com.example.lostfound.*
 import com.example.lostfound.data.model.Announcement
+import com.example.lostfound.data.model.LoggedInUser
 import com.example.lostfound.data.model.User
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 
 object ApolloClientService {
     private val okHttpClient = OkHttpClient.Builder().build()
-    private val apolloClient = ApolloClient.Builder().serverUrl("http://10.0.2.2:8000/graphql/").okHttpClient(okHttpClient).build()
+    private val URL = "http://10.0.2.2:8000/graphql/"
+    private val apolloClient = ApolloClient.Builder().serverUrl(URL).okHttpClient(okHttpClient).build()
 
     suspend fun register(username: String, password: String): String? {
         val response = apolloClient.mutation(CreateUserMutation(username, password)).execute()
@@ -64,8 +69,37 @@ object ApolloClientService {
     }
 
     suspend fun setUserInfo(dateOfBirth: Optional<String?>, firstName: Optional<String?>, lastName: Optional<String?>, phoneNumber: Optional<String?>, usrId: Int): String? {
-        val response = apolloClient.mutation(UpdateUserProfileMutation(dateOfBirth, firstName, Optional.absent(), lastName, phoneNumber, usrId)).execute()
+        val response = apolloClient.mutation(UpdateUserProfileMutation(dateOfBirth, firstName, Optional.present("hello.png"), lastName, phoneNumber, usrId)).execute()
         val id = response.data?.updateUserProfile?.id
         return id
+    }
+
+    suspend fun getMe(token:String): LoggedInUser? {
+        val interceptHttp = OkHttpClient.Builder().addInterceptor(AuthorizationInterceptor(token)).build()
+        val authorizedApolloClient = ApolloClient.Builder().serverUrl(URL).okHttpClient(interceptHttp).build()
+        val response = authorizedApolloClient.query(GetMeQuery()).execute()
+
+        if(response.data!=null) {
+            return response.data!!.me?.let {
+                LoggedInUser(
+                    it.id,
+                    //"${it.user.firstName} ${it.user.lastName}",
+                    email = it.user.email,
+                    //it.dateOfBirth.toString(),
+                   // it.phone
+                )
+            }
+
+        }
+        return null
+    }
+
+    private class AuthorizationInterceptor(val token:String):Interceptor{
+        override fun intercept(chain: Interceptor.Chain): Response {
+            val request = chain.request().newBuilder().addHeader("Authorization", "JWT $token").build()
+
+            return chain.proceed(request)
+        }
+
     }
 }

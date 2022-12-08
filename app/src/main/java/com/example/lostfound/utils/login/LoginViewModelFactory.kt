@@ -2,8 +2,8 @@ package com.example.lostfound.utils.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.lostfound.data.LoginDataSource
-import com.example.lostfound.data.LoginRepository
+import com.example.lostfound.data.user.LoginDataSource
+import com.example.lostfound.data.user.LoginRepository
 import com.example.lostfound.utils.register.RegisterViewModel
 
 /**

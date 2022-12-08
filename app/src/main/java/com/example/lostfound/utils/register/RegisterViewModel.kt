@@ -3,12 +3,10 @@ package com.example.lostfound.utils.register
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.lostfound.R
-import com.example.lostfound.data.LoginRepository
+import com.example.lostfound.data.user.LoginRepository
 import com.example.lostfound.data.Result
 import com.example.lostfound.utils.login.LoggedInUserView
-import com.example.lostfound.utils.login.LoginFormState
 import com.example.lostfound.utils.login.LoginResult
 import com.example.lostfound.utils.login.LoginViewModel
 import kotlinx.coroutines.*
@@ -31,8 +29,7 @@ class RegisterViewModel (loginRepository: LoginRepository) : LoginViewModel(logi
             val result = job.await()
             if (result is Result.Success) {
                 login(username, password)
-//                _loginResult.value =
-//                    LoginResult(success = LoggedInUserView(displayName = result.data.email))
+               // _loginResult.value = LoginResult(success = LoggedInUserView(displayName = result.data.email))
             } else {
                 _loginResult.value = LoginResult(error = R.string.register_failed)
             }

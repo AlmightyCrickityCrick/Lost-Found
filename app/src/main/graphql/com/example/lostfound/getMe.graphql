@@ -1,0 +1,12 @@
+query getMe{
+    me{
+        id,
+#        dateOfBirth,
+#        phone,
+        user{
+            email,
+#            firstName,
+#            lastName
+        }
+    }
+}

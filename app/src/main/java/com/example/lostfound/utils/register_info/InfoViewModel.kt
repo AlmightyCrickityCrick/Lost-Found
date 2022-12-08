@@ -1,15 +1,13 @@
 package com.example.lostfound.utils.register_info
 
-import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.lostfound.R
-import com.example.lostfound.data.LoginRepository
+import com.example.lostfound.data.user.LoginRepository
 import com.example.lostfound.data.Result
 import com.example.lostfound.data.model.LoggedInUser
 import com.example.lostfound.utils.login.LoggedInUserView
-import com.example.lostfound.utils.login.LoginFormState
 import com.example.lostfound.utils.login.LoginResult
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -60,8 +58,8 @@ class InfoViewModel(private val loginRepository: LoginRepository) :ViewModel(){
 
     // A placeholder date validation check
     private fun isDateValid(dateOfBirth:String): Boolean {
-        return if (dateOfBirth.count{it == '.'} == 2) {
-            dateOfBirth.indexOfFirst { it == '.'} == 4
+        return if (dateOfBirth.count{it == '-'} == 2) {
+            dateOfBirth.indexOfFirst { it == '-'} == 4
         } else {
             false
         }

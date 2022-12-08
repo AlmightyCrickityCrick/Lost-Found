@@ -66,8 +66,12 @@ private lateinit var binding: ActivityLoginBinding
                 updateUiWithUser(loginResult.success)
                 var user = loginViewModel.getUserFromRepository()
                 if(user!=null){
-                    setResult(Activity.RESULT_OK, Intent().putExtra("USER", user))
+                    var intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("USER", loginViewModel.getUserFromRepository())
+                    startActivity(intent)
+                    //Complete and destroy login activity once successful
                     finish()
+
                 }
             }
 //            setResult(Activity.RESULT_OK)
