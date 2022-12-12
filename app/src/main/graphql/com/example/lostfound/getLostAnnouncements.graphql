@@ -1,5 +1,6 @@
 query getLostAnnouncements{
     lostAnnouncements{
+    id,
         user{
             id,
             user{

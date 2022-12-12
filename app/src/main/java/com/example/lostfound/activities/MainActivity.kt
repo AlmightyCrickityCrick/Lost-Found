@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 //        var login = Intent(this, LoginActivity::class.java)
 //        resultLauncher.launch(login)
-        val user = intent.getSerializableExtra("USER") as LoggedInUser
+        user = intent.getSerializableExtra("USER") as LoggedInUser
         mDrawer =  binding.drawerLayout
         navDrawer = binding.nvDrawer
         setUpDrawerContent(navDrawer)

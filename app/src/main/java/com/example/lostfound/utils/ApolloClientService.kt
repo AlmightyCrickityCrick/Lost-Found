@@ -2,15 +2,17 @@ package com.example.lostfound.utils
 
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
-import com.apollographql.apollo3.api.Upload
+import com.example.lostfound.data.Result
 import com.apollographql.apollo3.network.okHttpClient
 import com.example.lostfound.*
+import com.example.lostfound.data.announcement.AnnouncementCreationRequestResult
 import com.example.lostfound.data.model.Announcement
 import com.example.lostfound.data.model.LoggedInUser
 import com.example.lostfound.data.model.User
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import java.io.IOException
 
 object ApolloClientService {
     private val okHttpClient = OkHttpClient.Builder().build()
@@ -35,7 +37,7 @@ object ApolloClientService {
         if((response.data!= null) and (response.data?.lostAnnouncements!= null))
             for(r in response.data?.lostAnnouncements!!){
                 if (r != null) {
-                    annList.add(Announcement((1..100).random(), r.title, User(r.user.id.toInt(), r.user.user.firstName + " " + r.user.user.lastName, R.drawable.ic_account), getLostTags(r.tags), r.content ))
+                    annList.add(Announcement(r.id.toInt(), r.title, User(r.user.id.toInt(), r.user.user.firstName + " " + r.user.user.lastName, R.drawable.ic_account), getLostTags(r.tags), r.content ))
                 }
             }
         return annList
@@ -101,5 +103,14 @@ object ApolloClientService {
             return chain.proceed(request)
         }
 
+    }
+
+    suspend fun createAnnouncement(type:String, content:String, location:String, tag:String, title:String, usrId: Int): Result<AnnouncementCreationRequestResult> {
+        val response = apolloClient.mutation(CreateNewAnnouncementMutation(type, content, Optional.present(null), location, Optional.present(0), tag, title, usrId)).execute()
+
+        if (response.errors.isNullOrEmpty()){
+            return Result.Success(AnnouncementCreationRequestResult(response.data?.createNewAnnouncement?.id))
+        }
+        return Result.Error(IOException("Announcement couldn't be created"))
     }
 }

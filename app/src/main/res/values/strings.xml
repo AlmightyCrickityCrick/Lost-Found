@@ -12,6 +12,7 @@
     <string name="invalid_date">Data must be in YYYY.MM.DD format</string>
     <string name="login_failed">"Login failed"</string>
     <string name="register_failed">"Register failed"</string>
+    <string name="ann_create_failed">Announcement couldn\'t be created</string>
     <string name="sign_in_to_continue">Sign in to continue</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="or">or</string>

@@ -79,6 +79,7 @@ class Dashboard : Fragment() {
         add_btn.setOnClickListener {
             activity?.let {
                 var intent = Intent(it, CreateAnnouncementActivity::class.java)
+                intent.putExtra("USER_ID", (activity as MainActivity).user.userId)
                 startActivity(intent)
             }
 
