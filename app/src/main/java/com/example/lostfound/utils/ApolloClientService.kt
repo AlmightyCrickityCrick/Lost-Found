@@ -20,13 +20,13 @@ object ApolloClientService {
     private val apolloClient = ApolloClient.Builder().serverUrl(URL).okHttpClient(okHttpClient).build()
 
     suspend fun register(username: String, password: String): String? {
-        val response = apolloClient.mutation(CreateUserMutation(username, password)).execute()
+        val response = apolloClient.mutation(CreateUserMutation(username, HashingService.hashString(password))).execute()
         val id = response.data?.createUser?.id
         return id
     }
 
     suspend fun login(username:String, password:String): String? {
-        val response = apolloClient.mutation(LoginMutation(username, password)).execute()
+        val response = apolloClient.mutation(LoginMutation(username, HashingService.hashString(password))).execute()
         val token = response.data?.login?.token
         return token
     }
