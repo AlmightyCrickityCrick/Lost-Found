@@ -1,5 +1,5 @@
-mutation CreateNewAnnouncement($annType: String!, $content: String!, $image: Upload, $location: String!, $reward: Int, $tag: String!, $title: String!, $userId: Int!){
-    createNewAnnouncement(annType: $annType, content: $content, image: $image, location: $location, reward: $reward, tag: $tag, title: $title, userId: $userId){
+mutation CreateNewAnnouncement($annType: String!, $content: String!, $image: Upload, $coordonates: String!, $streetName: String!, $reward: Int, $tag: String!, $title: String!){
+    createNewAnnouncement(annType: $annType, content: $content, image: $image, coordonates: $coordonates, streetName: $streetName, reward: $reward, tag: $tag, title: $title){
         id
     }
 }

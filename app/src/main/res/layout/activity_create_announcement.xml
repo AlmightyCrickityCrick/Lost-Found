@@ -110,29 +110,32 @@
             android:layout_marginBottom="7dp"
             android:layout_marginTop="7dp"/>
         <RadioGroup
+            android:id="@+id/ann_loc_radio"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <RadioButton
+                android:id="@+id/ann_loc_now"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:button="@color/white"
                 android:background="@drawable/radio_selector"
                 android:text="Your location"
                 android:textColor="@drawable/radio_text_selector"
-                android:checked="false"
+                android:checked="true"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="0dp"
                 android:layout_marginRight="12dp"
                 />
             <RadioButton
+                android:id="@+id/ann_loc_pick"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:button="@color/white"
                 android:background="@drawable/radio_selector"
                 android:text="Choose a location"
                 android:textColor="@drawable/radio_text_selector"
-                android:checked="true"
+                android:checked="false"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="0dp"
                 />

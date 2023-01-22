@@ -51,7 +51,11 @@ class LoginRepository(val dataSource: LoginDataSource) {
     }
 
     suspend fun setUserInfo(dateOfBirth: String, firstName: String, lastName: String, phoneNumber: String): Result<LoggedInUser> {
-        val result = user?.let { dataSource.setUserInfo(it.email, dateOfBirth, firstName, lastName, phoneNumber, it.userId.toInt()) }
+        val result = user?.let { it.token?.let { it1 ->
+            dataSource.setUserInfo(it.email, dateOfBirth, firstName, lastName, phoneNumber,
+                it1, it.userId
+            )
+        } }
             ?: return Result.Error(IOException("User doesnt exist"))
         if (result is Result.Success) {
             setLoggedInUser(result.data)

@@ -16,8 +16,11 @@ class LoginDataSource {
             var token = ApolloClientService.login(username, password)
             if (token!=null){
                 var user = ApolloClientService.getMe(token)
-                if(user!= null)
-                return Result.Success(user)
+
+                if(user!= null){
+                    user.token = token
+                    return Result.Success(user)
+                }
             }
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))
@@ -29,7 +32,7 @@ class LoginDataSource {
         try {
             var id = ApolloClientService.register(username,password)
             if(id!=null){
-                return Result.Success(LoggedInUser(id, email = username))
+                return Result.Success(LoggedInUser(id, email = username, token ="null"))
             }
         } catch (e: Throwable) {
             print(e.stackTrace)
@@ -39,13 +42,14 @@ class LoginDataSource {
 
     }
 
-    suspend fun setUserInfo(email:String, dateOfBirth: String, firstName: String, lastName: String, phoneNumber: String, usrId: Int): Result<LoggedInUser> {
+    suspend fun setUserInfo(email:String, dateOfBirth: String, firstName: String, lastName: String, phoneNumber: String, token:String, id: String): Result<LoggedInUser> {
         try {
-            var id = ApolloClientService.setUserInfo(Optional.present(dateOfBirth), Optional.present(firstName), Optional.present(lastName), Optional.present(phoneNumber), usrId)
-            if(id!=null){
+            var msg = ApolloClientService.setUserInfo(Optional.present(dateOfBirth), Optional.present(firstName), Optional.present(lastName), Optional.present(phoneNumber))
+            if(msg!=null){
                 return Result.Success(
                     LoggedInUser(
                         id,
+                        token,
                         "$firstName $lastName",
                         email,
                         dateOfBirth,

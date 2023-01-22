@@ -29,7 +29,7 @@
         android:textColorHint="?textColorNormal"
         app:hintTextColor="?accentColor"
         app:boxStrokeColor="?accentColor"
-        app:startIconDrawable="@drawable/ic_settings"
+        app:startIconDrawable="@drawable/ic_magnifier"
         app:startIconTint="?textColorDark">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search"

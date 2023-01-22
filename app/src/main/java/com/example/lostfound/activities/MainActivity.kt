@@ -1,11 +1,12 @@
 package com.example.lostfound.activities
 
-import android.app.Activity
-import android.content.Intent
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.lostfound.R
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =  ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (!checkPermission()) {
+            requestPermission()
+        }
 //        var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result->
 //            if(result.resultCode == Activity.RESULT_OK){
 //                 user = result.data?.getSerializableExtra(USER_CONST) as LoggedInUser
@@ -52,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.nav_chat -> {fragment = ChatList()
             }
+            R.id.nav_map ->{fragment = MapsFragment()}
         }
         var fragmentM = supportFragmentManager
         if (fragment != null) {
@@ -59,5 +64,14 @@ class MainActivity : AppCompatActivity() {
         }
         menuItem.setChecked(true)
         mDrawer.closeDrawers()
+    }
+    private fun checkPermission(): Boolean {
+        val result = ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.ACCESS_FINE_LOCATION)
+        val result1 = ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.ACCESS_COARSE_LOCATION)
+        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 1)
     }
 }

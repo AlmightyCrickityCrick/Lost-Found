@@ -17,6 +17,8 @@ import com.example.lostfound.activities.dashboard_states.FoundState
 import com.example.lostfound.activities.dashboard_states.LostState
 import com.example.lostfound.adapters.AnnouncementRecyclerViewAdapter
 import com.example.lostfound.data.DebugConstants
+import com.example.lostfound.data.model.Announcement
+import com.example.lostfound.listeners.AnnouncementListener
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -25,7 +27,7 @@ import kotlin.concurrent.timerTask
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class Dashboard : Fragment() {
+class Dashboard : Fragment(), AnnouncementListener {
     lateinit var recyclerView:RecyclerView
     lateinit var adapter: AnnouncementRecyclerViewAdapter
     var annArray= DebugConstants.getAnnouncements()
@@ -101,7 +103,7 @@ class Dashboard : Fragment() {
         }
     }
     private fun initAdapter() {
-        adapter = AnnouncementRecyclerViewAdapter(annArray)
+        adapter = AnnouncementRecyclerViewAdapter(annArray, this)
         recyclerView.adapter = adapter
     }
 
@@ -123,5 +125,13 @@ class Dashboard : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onAnnouncementClicked(ann: Announcement) {
+        activity?.let {
+            var intent = Intent(it, AnnouncementDetailActivity::class.java)
+            intent.putExtra("ID", ann.found_ann_id)
+            startActivity(intent)
+        }
     }
 }

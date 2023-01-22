@@ -1,0 +1,14 @@
+query GetMapAnnouncements{
+    foundAnnouncements{
+        id,
+        title,
+        content,
+        coordonates,
+    }
+    lostAnnouncements{
+        id,
+        title,
+        content,
+        coordonates,
+    }
+}

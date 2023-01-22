@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id "com.apollographql.apollo3"
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+
 }
 
 android {
@@ -46,12 +48,19 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "com.apollographql.apollo3:apollo-runtime:3.7.1"
     implementation "com.apollographql.apollo:apollo-coroutines-support:2.4.6"
+    implementation "commons-io:commons-io:2.7"
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'com.squareup.picasso:picasso:2.8'
+
 }
 
 apollo {
+    service("service") {
     packageName.set("com.example.lostfound")
     generateKotlinModels.set(true)
+        mapScalarToUpload("Upload")
+    }
 }

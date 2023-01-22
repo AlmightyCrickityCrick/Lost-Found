@@ -1,7 +1,7 @@
 query getLostAnnouncements{
     lostAnnouncements{
     id,
-        user{
+        userProfile{
             id,
             user{
                 firstName,
@@ -11,7 +11,7 @@ query getLostAnnouncements{
         },
         title,
         content,
-        location,
+        streetName,
         tags{
             name
         }

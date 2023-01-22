@@ -1,7 +1,7 @@
 query getFoundAnnouncements{
     foundAnnouncements{
         id,
-        user{
+        userProfile{
             id,
             user{
                 firstName,
@@ -11,7 +11,7 @@ query getFoundAnnouncements{
         },
         title,
         content,
-        location,
+        streetName,
         tags{
             name
         }

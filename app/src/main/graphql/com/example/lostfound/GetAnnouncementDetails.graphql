@@ -1,0 +1,19 @@
+query GetAnnouncementDetails($id:Int!){
+    announcement(id:$id){
+        id,
+        title,
+        content,
+        streetName,
+        coordonates,
+        tags{
+            name
+        },
+        userProfile{
+            id,
+            user{
+                firstName,
+                lastName
+            },
+        }
+    }
+}
