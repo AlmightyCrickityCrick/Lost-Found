@@ -8,12 +8,14 @@ query GetAnnouncementDetails($id:Int!){
         tags{
             name
         },
+        image,
         userProfile{
             id,
             user{
                 firstName,
                 lastName
             },
+            rating
         }
     }
 }

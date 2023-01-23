@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -17,7 +18,7 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navDrawer: NavigationView
-    private lateinit var mDrawer:DrawerLayout
+    lateinit var mDrawer:DrawerLayout
     private val USER_CONST = "USER"
     lateinit var user : LoggedInUser
 
@@ -38,6 +39,11 @@ class MainActivity : AppCompatActivity() {
         user = intent.getSerializableExtra("USER") as LoggedInUser
         mDrawer =  binding.drawerLayout
         navDrawer = binding.nvDrawer
+        var head = navDrawer.getHeaderView(0)
+        var name= head.findViewById<TextView>(R.id.drawer_username)
+        name.text = user.displayName
+        var email = head.findViewById<TextView>(R.id.drawer_email)
+        email.text = user.email
         setUpDrawerContent(navDrawer)
         navDrawer.checkedItem?.let { selectDrawerItem(it) }
     }
@@ -56,7 +62,8 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.nav_chat -> {fragment = ChatList()
             }
-            R.id.nav_map ->{fragment = MapsFragment()}
+            R.id.nav_map ->{fragment = MapsFragment() }
+            R.id.nav_profile->{fragment = ProfileFragment()}
         }
         var fragmentM = supportFragmentManager
         if (fragment != null) {

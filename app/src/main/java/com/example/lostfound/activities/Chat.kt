@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lostfound.R
 import com.example.lostfound.adapters.ChatAdapter
 import com.example.lostfound.data.DebugConstants
 import com.example.lostfound.data.model.Contact
+import com.example.lostfound.utils.setMenuButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,6 +52,7 @@ class Chat(private var contact:Contact) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var toolbar:androidx.appcompat.widget.Toolbar = view.findViewById(R.id.single_chat_toolbar)
+        activity?.let { setMenuButton(toolbar, it) }
         var name:TextView = toolbar.findViewById(R.id.toolbar_fragment_name)
         name.setText(contact.user.user_name)
         recyclerView = view.findViewById(R.id.message_recycler_view)

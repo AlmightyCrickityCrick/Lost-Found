@@ -15,7 +15,7 @@ class LoginDataSource {
         try {
             var token = ApolloClientService.login(username, password)
             if (token!=null){
-                var user = ApolloClientService.getMe(token)
+                var user = ApolloClientService.getMe()
 
                 if(user!= null){
                     user.token = token
@@ -28,6 +28,13 @@ class LoginDataSource {
         return Result.Error(IOException("Error logging in"))
     }
 
+    suspend fun getUserInfo():Result<LoggedInUser>{
+
+        var user = ApolloClientService.getMe()
+        if(user!=null) return Result.Success(user)
+        return Result.Error(IOException("Couldnt obtain user info"))
+
+    }
     suspend fun register(username:String, password: String): Result<LoggedInUser> {
         try {
             var id = ApolloClientService.register(username,password)

@@ -51,7 +51,6 @@ class AnnouncementDetailActivity : AppCompatActivity() {
         user = binding.annUserUsername
         imageView = binding.annImg
 
-        Picasso.get().load("https://cdn.discordapp.com/attachments/1017323185026379779/1066824431785230396/image.png").resize(1024, 0).into(imageView)
 
 
     }
@@ -65,6 +64,7 @@ class AnnouncementDetailActivity : AppCompatActivity() {
         location.text = annDetail.streetName
         t = "${annDetail.user.user_name} (${annDetail.user.Rating})"
         user.text = t
+        if(annDetail.image != "") Picasso.get().load("http://10.0.2.2:8000/media/${annDetail.image}").resize(1020, 0).into(imageView)
 
 
     }

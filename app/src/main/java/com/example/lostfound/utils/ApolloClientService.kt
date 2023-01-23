@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.File
 import java.io.IOException
+import kotlin.Error
 
 object ApolloClientService {
     private val okHttpClient = OkHttpClient.Builder().build()
@@ -20,6 +21,7 @@ object ApolloClientService {
     private val apolloClient = ApolloClient.Builder().serverUrl(URL).okHttpClient(okHttpClient).build()
     lateinit var interceptHttp :OkHttpClient
     lateinit var authorizedApolloClient : ApolloClient
+    lateinit var token:String
 
     suspend fun register(username: String, password: String): String? {
         val response = apolloClient.mutation(CreateUserMutation(username, HashingService.hashString(password))).execute()
@@ -31,6 +33,7 @@ object ApolloClientService {
         val response = apolloClient.mutation(LoginMutation(username, HashingService.hashString(password))).execute()
         val token = response.data?.login?.token
         if(token != null) {
+            this.token = token
             interceptHttp =
                 OkHttpClient.Builder().addInterceptor(AuthorizationInterceptor(token)).build()
             authorizedApolloClient =
@@ -70,7 +73,7 @@ object ApolloClientService {
         val response = apolloClient.query(GetAnnouncementDetailsQuery(id)).execute()
         if((response?.data!=null) && (response?.data?.announcement!=null)){
             var r = response?.data?.announcement?:null
-            if(r!=null)return AnnDetails(r.id.toInt(), r.title, r.content, User(r.userProfile.id.toInt(), "${r.userProfile.user.firstName} ${r.userProfile.user.lastName}", R.drawable.ic_account, 500),getDetailsTags(r.tags), r.streetName)
+            if(r!=null)return AnnDetails(r.id.toInt(), r.title, r.content, User(r.userProfile.id.toInt(), "${r.userProfile.user.firstName} ${r.userProfile.user.lastName}", R.drawable.ic_account, r.userProfile.rating),getDetailsTags(r.tags), r.streetName, r.image)
         }
         return null
     }
@@ -128,21 +131,36 @@ object ApolloClientService {
         return msg
     }
 
-    suspend fun getMe(token:String): LoggedInUser? {
+    suspend fun getMe(): LoggedInUser? {
+        try {
+            val response = authorizedApolloClient.query(GetMeFullQuery()).execute()
+            if(response.data!=null && response.errors.isNullOrEmpty()) {
+                return response.data!!.me?.let { it ->
+                    LoggedInUser(
+                        it.id,
+                        token=token,
+                        "${it.user.firstName} ${it.user.lastName}",
+                        email = it.user.email,
+                        dateOfBirth = it.dateOfBirth.toString(),
+                        phone = it.phone,
+                        rating = it.rating
+                    )
+                }
+
+            }
+        } catch (e:Error){}
+
         val response = authorizedApolloClient.query(GetMeQuery()).execute()
 
-        if(response.data!=null) {
-            return response.data!!.me?.let {
-                LoggedInUser(
-                    it.id,
-                    token,
-                    //"${it.user.firstName} ${it.user.lastName}",
-                    email = it.user.email,
-                    //it.dateOfBirth.toString(),
-                   // it.phone
-                )
-            }
-
+        if(response.data!=null) return response.data!!.me?.let {
+            LoggedInUser(
+                it.id,
+                token,
+                //"${it.user.firstName} ${it.user.lastName}",
+                email = it.user.email,
+                //it.dateOfBirth.toString(),
+               // it.phone
+            )
         }
         return null
     }

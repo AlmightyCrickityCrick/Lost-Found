@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lostfound.R
 import com.example.lostfound.activities.dashboard_states.DashboardState
@@ -19,6 +20,7 @@ import com.example.lostfound.adapters.AnnouncementRecyclerViewAdapter
 import com.example.lostfound.data.DebugConstants
 import com.example.lostfound.data.model.Announcement
 import com.example.lostfound.listeners.AnnouncementListener
+import com.example.lostfound.utils.setMenuButton
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -52,7 +54,6 @@ class Dashboard : Fragment(), AnnouncementListener {
         }
     }
     fun updateDashboard() {
-        Toast.makeText(this.context, annArray.size.toString(), Toast.LENGTH_LONG ).show()
         //adapter.notifyDataSetChanged()
         initAdapter()
     }
@@ -69,6 +70,7 @@ class Dashboard : Fragment(), AnnouncementListener {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.announcement_view)
         toolbar = view.findViewById(R.id.ann_dash_toolbar)
+        activity?.let { setMenuButton(toolbar, it) }
         initAdapter()
         state = LostState(this)
 

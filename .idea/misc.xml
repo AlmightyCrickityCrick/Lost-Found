@@ -26,12 +26,13 @@
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/chat_list_tololbar.xml" value="0.2776268115942029" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/chat_list_toolbar.xml" value="0.21105072463768115" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/chat_toolbar.xml" value="0.271286231884058" />
-        <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/dashboard_toolbar.xml" value="0.28894927536231885" />
+        <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/dashboard_toolbar.xml" value="0.1" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/fragment_blank.xml" value="0.2776268115942029" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/fragment_chat.xml" value="0.264" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/fragment_chat_list.xml" value="0.1" />
-        <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/fragment_lost.xml" value="0.2957427536231884" />
+        <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/fragment_lost.xml" value="0.2306338028169014" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/fragment_maps.xml" value="0.2" />
+        <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/item_container_received_message.xml" value="0.271286231884058" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/item_container_sent_message.xml" value="0.271286231884058" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/lost_found_card.xml" value="0.264" />
@@ -40,6 +41,7 @@
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/toolbar_announcement_detail.xml" value="0.2" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/toolbar_create_announcement.xml" value="0.28894927536231885" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/toolbar_map.xml" value="0.1" />
+        <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/layout/toolbar_profile.xml" value="0.1" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/menu/drawer_view.xml" value="0.2791666666666667" />
         <entry key="..\:/Temp/Programming/LostFound/app/src/main/res/xml/network_security_config.xml" value="0.16979166666666667" />
       </map>

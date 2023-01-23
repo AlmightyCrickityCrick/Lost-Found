@@ -1,8 +1,15 @@
 package com.example.lostfound.utils
 
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Gravity
+import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
+import androidx.fragment.app.FragmentActivity
+import com.example.lostfound.R
+import com.example.lostfound.activities.MainActivity
 
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
@@ -14,4 +21,11 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
+}
+
+fun setMenuButton(toolbar:View, context:FragmentActivity){
+    var butMenu = toolbar.findViewById<ImageView>(R.id.toolbar_menu_button)
+    butMenu.setOnClickListener {
+        (context as MainActivity).mDrawer.openDrawer(Gravity.LEFT)
+    }
 }

@@ -12,6 +12,7 @@ data class LoggedInUser(
     var email :String,
     var dateOfBirth: String?=null,
     var img :String?=null,
-    var phone:String?=null
+    var phone:String?=null,
+    var rating:Int?=null
 
 ):Serializable

@@ -11,11 +11,13 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.example.lostfound.R
 import com.example.lostfound.data.model.MapAnn
 import com.example.lostfound.databinding.AnnouncementCardMapBinding
 import com.example.lostfound.databinding.FragmentMapsBinding
 import com.example.lostfound.utils.ApolloClientService
+import com.example.lostfound.utils.setMenuButton
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -66,6 +68,8 @@ class MapsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        var toolbar = view.findViewById<Toolbar>(R.id.map_toolbar)
+        activity?.let { setMenuButton(toolbar, it) }
         getMapAnnouncements()
         mapFragment?.getMapAsync(callback)
     }

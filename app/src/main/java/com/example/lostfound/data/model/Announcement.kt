@@ -8,4 +8,4 @@ data class User(val user_id:Int, var user_name:String, var user_pic:Int, var Rat
 
 data class MapAnn(var id:Int, var ann_title: String, var content: String, var coords:LatLng)
 
-data class AnnDetails(var id: Int, var ann_title: String, var content: String, var user: User, var tags: ArrayList<String>, var streetName:String?=null, )
+data class AnnDetails(var id: Int, var ann_title: String, var content: String, var user: User, var tags: ArrayList<String>, var streetName:String?=null, var image:String?=null)

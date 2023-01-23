@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lostfound.R
 import com.example.lostfound.adapters.ContactAdapter
 import com.example.lostfound.data.DebugConstants
 import com.example.lostfound.data.model.Contact
 import com.example.lostfound.listeners.ContactListener
+import com.example.lostfound.utils.setMenuButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,6 +51,8 @@ class ChatList : Fragment(), ContactListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.chat_list_view)
+        var toolbar = view.findViewById<Toolbar>(R.id.toolbar_chat_list)
+        activity?.let { setMenuButton(toolbar, it) }
         initAdapter()
     }
     private fun initAdapter() {

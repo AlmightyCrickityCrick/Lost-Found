@@ -1,0 +1,13 @@
+query getMeFull{
+    me{
+        id,
+        dateOfBirth,
+        phone,
+        user{
+            email,
+            firstName,
+            lastName
+        },
+        rating
+    }
+}
