@@ -1,10 +1,12 @@
 package com.example.lostfound.activities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lostfound.R
@@ -12,6 +14,7 @@ import com.example.lostfound.adapters.ContactAdapter
 import com.example.lostfound.data.DebugConstants
 import com.example.lostfound.data.model.Contact
 import com.example.lostfound.listeners.ContactListener
+import com.example.lostfound.utils.crypto.CryptographyService
 import com.example.lostfound.utils.setMenuButton
 
 // TODO: Rename parameter arguments, choose names that match
@@ -54,6 +57,10 @@ class ChatList : Fragment(), ContactListener{
         var toolbar = view.findViewById<Toolbar>(R.id.toolbar_chat_list)
         activity?.let { setMenuButton(toolbar, it) }
         initAdapter()
+
+
+
+
     }
     private fun initAdapter() {
         adapter = ContactAdapter(contacts, this)

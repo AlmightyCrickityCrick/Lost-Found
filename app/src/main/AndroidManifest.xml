@@ -18,11 +18,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LostFound">
+
+        <service
+            android:name=".utils.notifications.NotificationService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".activities.AnnouncementDetailActivity"
             android:exported="true"
             android:theme="@style/NoActionBarTheme"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
 
         <service
             android:name=".utils.location.NavigationService"
@@ -45,7 +55,7 @@
             android:name=".activities.RegisterInformationActivity"
             android:exported="true"
             android:theme="@style/NoActionBarTheme"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.RegisterActivity"
             android:exported="true"

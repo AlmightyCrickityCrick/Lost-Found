@@ -7,13 +7,13 @@ import com.apollographql.apollo3.network.okHttpClient
 import com.example.lostfound.*
 import com.example.lostfound.data.announcement.AnnouncementCreationRequestResult
 import com.example.lostfound.data.model.*
+import com.example.lostfound.utils.crypto.HashingService
 import com.google.android.gms.maps.model.LatLng
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.File
 import java.io.IOException
-import kotlin.Error
 
 object ApolloClientService {
     private val okHttpClient = OkHttpClient.Builder().build()
@@ -148,7 +148,7 @@ object ApolloClientService {
                 }
 
             }
-        } catch (e:Error){}
+        } catch (e:Throwable){}
 
         val response = authorizedApolloClient.query(GetMeQuery()).execute()
 

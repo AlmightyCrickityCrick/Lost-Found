@@ -13,6 +13,7 @@ import com.example.lostfound.data.model.User
 import com.example.lostfound.databinding.ActivityAnnouncementDetailBinding
 import com.example.lostfound.databinding.ActivityCreateAnnouncementBinding
 import com.example.lostfound.utils.announcement.AnnouncementDetailController
+import com.example.lostfound.utils.crypto.CryptographyService
 import com.squareup.picasso.Picasso
 
 class AnnouncementDetailActivity : AppCompatActivity() {
@@ -32,7 +33,6 @@ class AnnouncementDetailActivity : AppCompatActivity() {
         binding =  ActivityAnnouncementDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         id = intent.getSerializableExtra("ID") as Int
-        Toast.makeText(this, "$id", Toast.LENGTH_SHORT).show()
 
         var detailController = AnnouncementDetailController()
         if(id!=null)detailController.getAnnouncement(id!!)
@@ -52,6 +52,7 @@ class AnnouncementDetailActivity : AppCompatActivity() {
         imageView = binding.annImg
 
 
+        //Testing the ciphers
 
     }
 

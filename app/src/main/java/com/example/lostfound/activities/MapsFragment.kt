@@ -72,6 +72,7 @@ class MapsFragment : Fragment() {
         activity?.let { setMenuButton(toolbar, it) }
         getMapAnnouncements()
         mapFragment?.getMapAsync(callback)
+
     }
 
     private fun addCard(title:String, text:String, id:Int){

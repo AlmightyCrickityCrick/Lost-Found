@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "784735390156",
+    "project_id": "pbl-das",
+    "storage_bucket": "pbl-das.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784735390156:android:dc82cbbc2c65b0adb1b569",
+        "android_client_info": {
+          "package_name": "com.example.lostfound"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784735390156-mc1hparvbg1dcm4b1muljhkdmfcc6prh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBALnHsG4FCUTWscH0QkXX0xSXzAP3aZLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "784735390156-mc1hparvbg1dcm4b1muljhkdmfcc6prh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

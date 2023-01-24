@@ -1,4 +1,4 @@
-package com.example.lostfound.utils
+package com.example.lostfound.utils.crypto
 
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest

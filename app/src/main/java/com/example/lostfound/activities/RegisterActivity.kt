@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
@@ -14,6 +15,7 @@ import android.widget.Toast
 import com.example.lostfound.R
 import com.example.lostfound.databinding.ActivityRegisterBinding
 import com.example.lostfound.utils.afterTextChanged
+import com.example.lostfound.utils.crypto.CryptographyService
 import com.example.lostfound.utils.login.LoggedInUserView
 import com.example.lostfound.utils.login.LoginViewModelFactory
 import com.example.lostfound.utils.register.RegisterViewModel
@@ -109,6 +111,8 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
             this.finish()
         }
+        registerViewModel.tryEncryption(this)
+
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {

@@ -1,11 +1,16 @@
 package com.example.lostfound.utils.register
 
+import android.content.Context
+import android.util.Log
 import android.util.Patterns
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.lostfound.R
 import com.example.lostfound.data.user.LoginRepository
 import com.example.lostfound.data.Result
+import com.example.lostfound.utils.crypto.CryptographyService
 import com.example.lostfound.utils.login.LoggedInUserView
 import com.example.lostfound.utils.login.LoginResult
 import com.example.lostfound.utils.login.LoginViewModel
@@ -35,6 +40,16 @@ class RegisterViewModel (loginRepository: LoginRepository) : LoginViewModel(logi
             }
         }
         }
+
+    fun tryEncryption(context: Context){
+        viewModelScope.launch(Dispatchers.IO){
+            var hello = "Hello how are you!! I love you***^^^"
+            var k = CryptographyService.generateAssymetricKey()
+            var bye = CryptographyService.encryptAsym(k.first, hello)
+            var x = CryptographyService.decryptAsym(k.second, bye)
+            print("hello")
+        }
+    }
 
 
     override fun loginDataChanged(username: String, password: String) {
