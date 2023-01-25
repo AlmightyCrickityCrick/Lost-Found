@@ -15,7 +15,7 @@ object DebugConstants {
     }
     fun getContacts():ArrayList<Contact>{
         var x = ArrayList<Contact>()
-        for (i in 1.. 6) x.add(Contact(User(1, "User Name2", R.drawable.ic_account), "Hello, I fund something that belongs to you", "23:5${i} pm"))
+        for (i in 1.. 6) x.add(Contact(User(1, "User Name2", R.drawable.ic_account), "Hello, I fund something that belongs to you", "23:5${i} pm", (0..1).random()))
     return x
     }
 

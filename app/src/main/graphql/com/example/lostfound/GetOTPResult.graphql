@@ -1,0 +1,5 @@
+mutation GetOTPResult($otpId: Int, $code: String){
+    getOtpVerification(code: $code, otpId: $otpId){
+        msg
+    }
+}

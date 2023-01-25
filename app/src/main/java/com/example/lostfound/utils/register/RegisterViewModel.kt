@@ -1,9 +1,7 @@
 package com.example.lostfound.utils.register
 
 import android.content.Context
-import android.util.Log
 import android.util.Patterns
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -71,8 +69,17 @@ class RegisterViewModel (loginRepository: LoginRepository) : LoginViewModel(logi
         }
     }
 
-    // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
+        var hasSpecialSymbols = false
+        var special = "!\"#$%&'()*+,-./:;<=>?@[]^_`{|}~"
+        for(i in  special){
+            if(i in password) hasSpecialSymbols = true
+        }
+        var upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        var hasUpper = false
+        for(i in  upper){
+            if(i in password) hasUpper = true
+        }
+        return ((password.length >= 8) && hasUpper && hasSpecialSymbols)
     }
 }

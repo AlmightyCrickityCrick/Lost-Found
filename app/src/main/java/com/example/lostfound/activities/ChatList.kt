@@ -1,12 +1,10 @@
 package com.example.lostfound.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lostfound.R
@@ -14,7 +12,6 @@ import com.example.lostfound.adapters.ContactAdapter
 import com.example.lostfound.data.DebugConstants
 import com.example.lostfound.data.model.Contact
 import com.example.lostfound.listeners.ContactListener
-import com.example.lostfound.utils.crypto.CryptographyService
 import com.example.lostfound.utils.setMenuButton
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,7 +30,7 @@ class ChatList : Fragment(), ContactListener{
     private var param2: String? = null
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: ContactAdapter
-    var contacts = DebugConstants.getContacts()
+    var chats = DebugConstants.getContacts()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +60,7 @@ class ChatList : Fragment(), ContactListener{
 
     }
     private fun initAdapter() {
-        adapter = ContactAdapter(contacts, this)
+        adapter = ContactAdapter(chats, this)
         recyclerView.adapter = adapter
     }
 
@@ -91,5 +88,13 @@ class ChatList : Fragment(), ContactListener{
         var chatFragment = Chat(contact)
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.activity_content, chatFragment)?.commit()
+    }
+
+    override fun onAcceptClicked(contact: Contact) {
+        onContactClicked(contact)
+    }
+
+    override fun onDeclineClicked(contact: Contact) {
+        TODO("Not yet implemented")
     }
 }

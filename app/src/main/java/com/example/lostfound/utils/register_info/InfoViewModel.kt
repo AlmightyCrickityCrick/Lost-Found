@@ -12,6 +12,7 @@ import com.example.lostfound.utils.login.LoginResult
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
+import java.util.*
 
 class InfoViewModel(private val loginRepository: LoginRepository) :ViewModel(){
     private val _infoForm = MutableLiveData<InfoFormState>()
@@ -20,10 +21,10 @@ class InfoViewModel(private val loginRepository: LoginRepository) :ViewModel(){
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun setUserInfo(dateOfBirth: String, firstName: String, lastName:String, phoneNumber:String) {
+    fun setUserInfo(dateOfBirth: String, firstName: String, lastName:String, phoneNumber:String, key:String?) {
         // can be launched in a separate asynchronous job
         runBlocking {
-            val job = GlobalScope.async { loginRepository.setUserInfo(dateOfBirth, firstName, lastName, phoneNumber) }
+            val job = GlobalScope.async { loginRepository.setUserInfo(dateOfBirth, firstName, lastName, phoneNumber, key) }
             val result = job.await()
 
             if (result is Result.Success) {
@@ -58,15 +59,16 @@ class InfoViewModel(private val loginRepository: LoginRepository) :ViewModel(){
 
     // A placeholder date validation check
     private fun isDateValid(dateOfBirth:String): Boolean {
-        return if (dateOfBirth.count{it == '-'} == 2) {
-            dateOfBirth.indexOfFirst { it == '-'} == 4
-        } else {
-            false
-        }
+        var isFormated =((dateOfBirth.count{it == '-'} == 2) && (dateOfBirth.indexOfFirst { it == '-'} == 4))
+        if(!isFormated) return false
+        return true
+        //var isAgeCorrect= (dateOfBirth.subSequence(0, 4).toInt() < Calendar.getInstance().get(Calendar.YEAR)) && (dateOfBirth.subSequence(0, 4).toInt() > 1900)
+        //var isMonthCorrect = (dateOfBirth.subSequence(5, 7).toInt() > 0) && (dateOfBirth.subSequence(5, 7).toInt() <13)
+        //return isAgeCorrect && isMonthCorrect
     }
 
     // A placeholder phone validation check
     private fun isPhoneValid(phoneNumber: String): Boolean {
-        return phoneNumber.length == 9
+        return ((phoneNumber.length == 9) && (phoneNumber.get(0) == '0') && (phoneNumber.get(1) in "67"))
     }
 }

@@ -49,9 +49,9 @@ class LoginDataSource {
 
     }
 
-    suspend fun setUserInfo(email:String, dateOfBirth: String, firstName: String, lastName: String, phoneNumber: String, token:String, id: String): Result<LoggedInUser> {
+    suspend fun setUserInfo(email:String, dateOfBirth: String, firstName: String, lastName: String, phoneNumber: String, token:String, id: String, key:String?): Result<LoggedInUser> {
         try {
-            var msg = ApolloClientService.setUserInfo(Optional.present(dateOfBirth), Optional.present(firstName), Optional.present(lastName), Optional.present(phoneNumber))
+            var msg = ApolloClientService.setUserInfo(Optional.present(dateOfBirth), Optional.present(firstName), Optional.present(lastName), Optional.present(phoneNumber), Optional.present(key))
             if(msg!=null){
                 return Result.Success(
                     LoggedInUser(

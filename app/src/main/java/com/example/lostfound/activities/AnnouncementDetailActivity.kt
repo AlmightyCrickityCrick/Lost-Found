@@ -51,6 +51,8 @@ class AnnouncementDetailActivity : AppCompatActivity() {
         user = binding.annUserUsername
         imageView = binding.annImg
 
+        btn_message = binding.btnAnnDetailMessage
+
 
         //Testing the ciphers
 

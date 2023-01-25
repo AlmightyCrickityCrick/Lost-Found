@@ -10,11 +10,14 @@ import com.example.lostfound.data.user.LoginRepository
 import com.example.lostfound.data.model.LoggedInUser
 import com.example.lostfound.databinding.ActivityRegisterInformationBinding
 import com.example.lostfound.utils.afterTextChanged
+import com.example.lostfound.utils.crypto.CryptographyService
 import com.example.lostfound.utils.register_info.InfoViewModel
 
 class RegisterInformationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterInformationBinding
     private lateinit var infoViewModel: InfoViewModel
+    private var publicKey: String?=null
+    private val loginRepository = LoginRepository(LoginDataSource())
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,13 +25,15 @@ class RegisterInformationActivity : AppCompatActivity() {
         binding = ActivityRegisterInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        this.generateKeys()
         val firstName = binding.firstName
         val lastName = binding.lastName
         val phone = binding.phoneNumber
         val dateOfBirth = binding.dateOfBirth
         val btnCreateAccount = binding.createAcc
 
-        val loginRepository = LoginRepository(LoginDataSource())
+
+
         loginRepository.setLoggedInUser(intent.getSerializableExtra("USER") as LoggedInUser)
 
         infoViewModel = InfoViewModel(loginRepository)
@@ -37,12 +42,12 @@ class RegisterInformationActivity : AppCompatActivity() {
             btnCreateAccount.isEnabled = infoState.isDataValid
 
             if(infoState.usernameError!=null){
-                Toast.makeText(this, infoState.usernameError, Toast.LENGTH_SHORT).show()
+                firstName.error = getString(infoState.usernameError)
             } else if( infoState.dateError != null){
-                Toast.makeText(this, infoState.dateError, Toast.LENGTH_SHORT).show()
+                dateOfBirth.error = getString(infoState.dateError)
             }
             else if(infoState.phoneError!= null){
-                Toast.makeText(this, infoState.phoneError, Toast.LENGTH_SHORT).show()
+                phone.error= getString(infoState.phoneError)
             }
         })
         infoViewModel.loginResult.observe(this@RegisterInformationActivity, Observer {
@@ -104,8 +109,20 @@ class RegisterInformationActivity : AppCompatActivity() {
             infoViewModel.setUserInfo(dateOfBirth.text.toString(),
                 firstName.text.toString(),
                 lastName.text.toString(),
-                phone.text.toString())
+                phone.text.toString(),
+            publicKey)
         }
 
+    }
+
+    fun generateKeys(){
+        var private = CryptographyService.getFromSharedPreference("PRIVATE ${loginRepository.user?.userId}", applicationContext)
+        if(!private.isNullOrEmpty()) {
+            this.publicKey = null
+            return
+        }
+        var pair = CryptographyService.generateAssymetricKey()
+        CryptographyService.saveToSharedPreference("PRIVATE ${loginRepository.user?.userId}", pair.second, applicationContext)
+        publicKey = pair.first
     }
 }

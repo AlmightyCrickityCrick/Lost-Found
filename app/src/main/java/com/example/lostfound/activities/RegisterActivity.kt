@@ -18,11 +18,13 @@ import com.example.lostfound.utils.afterTextChanged
 import com.example.lostfound.utils.crypto.CryptographyService
 import com.example.lostfound.utils.login.LoggedInUserView
 import com.example.lostfound.utils.login.LoginViewModelFactory
+import com.example.lostfound.utils.register.OTPViewModel
 import com.example.lostfound.utils.register.RegisterViewModel
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var registerViewModel: RegisterViewModel
+    private lateinit var otpViewModel: OTPViewModel
     private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +40,23 @@ class RegisterActivity : AppCompatActivity() {
         val login = binding.btnToLogin
         val loading = binding.loading
 
+        otpViewModel = OTPViewModel()
+
+        otpViewModel.OTPId.observe(this@RegisterActivity, Observer {
+            val otpId = it?:return@Observer
+            if(otpId!=null){
+                setResult(RESULT_OK)
+                intent = Intent(this, OTPActivity::class.java)
+                intent.putExtra("USERNAME", username.text.toString())
+                intent.putExtra("PASS", password.text.toString())
+                intent.putExtra("OTPId", otpId.toString())
+                startActivity(intent)
+                //Complete and destroy login activity once successful
+                finish()
+            }
+
+
+        })
         registerViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(RegisterViewModel::class.java)
 
@@ -55,24 +74,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         })
 
-        registerViewModel.loginResult.observe(this@RegisterActivity, Observer {
-            val loginResult = it ?: return@Observer
 
-            loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
-            }
-            if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
-                setResult(Activity.RESULT_OK)
-                intent = Intent(this, RegisterInformationActivity::class.java)
-                intent.putExtra("USER", registerViewModel.getUserFromRepository())
-                startActivity(intent)
-                //Complete and destroy login activity once successful
-                finish()
-            }
-
-        })
 
         username.afterTextChanged {
             registerViewModel.loginDataChanged(
@@ -101,8 +103,8 @@ class RegisterActivity : AppCompatActivity() {
 //            }
 
             signup.setOnClickListener {
+                otpViewModel.sendOTP(username.text.toString())
                 loading.visibility = View.VISIBLE
-                registerViewModel.register(username.text.toString(), password.text.toString())
             }
         }
 
@@ -111,24 +113,9 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
             this.finish()
         }
-        registerViewModel.tryEncryption(this)
-
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
-    }
 
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
-    }
 }
 
 /**

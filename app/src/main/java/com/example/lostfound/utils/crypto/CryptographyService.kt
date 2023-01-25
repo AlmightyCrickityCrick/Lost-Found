@@ -58,13 +58,10 @@ object CryptographyService {
         var asymKey = X509EncodedKeySpec(decodedKey)
         var public = kf.generatePublic(asymKey)
 
-        var text = input.commonAsUtf8ToByteArray()
-        var decoderText = Base64.getEncoder().encodeToString(text)
-        var plaintext = Base64.getDecoder().decode(decoderText)
+        var plaintext = Base64.getDecoder().decode(input)
 
         val cipher = Cipher.getInstance("RSA")
         cipher.init(Cipher.ENCRYPT_MODE, public)
-        var iv = cipher.iv
         val ciphertext: ByteArray = cipher.doFinal(plaintext)
         return Base64.getEncoder().encodeToString(ciphertext)
     }

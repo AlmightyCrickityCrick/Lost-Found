@@ -1,6 +1,6 @@
-mutation UpdateUserProfile($dateOfBirth: String, $firstName: String, $image: Upload, $lastName: String, $phoneNumber: String)
+mutation UpdateUserProfile($dateOfBirth: String, $firstName: String, $image: Upload, $lastName: String, $phoneNumber: String, $publicKey:String)
 {
-    updateUserProfile(dateOfBirth: $dateOfBirth, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, image: $image){
+    updateUserProfile(dateOfBirth: $dateOfBirth, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, image: $image, publicKey: $publicKey){
         msg,
     }
 }

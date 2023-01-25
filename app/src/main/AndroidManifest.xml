@@ -18,6 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LostFound">
+        <activity
+            android:name=".activities.OTPActivity"
+            android:exported="true"
+            android:theme="@style/NoActionBarTheme"
+            android:windowSoftInputMode="adjustResize"/>
 
         <service
             android:name=".utils.notifications.NotificationService"

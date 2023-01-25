@@ -125,8 +125,8 @@ object ApolloClientService {
         return annList
     }
 
-    suspend fun setUserInfo(dateOfBirth: Optional<String?>, firstName: Optional<String?>, lastName: Optional<String?>, phoneNumber: Optional<String?>): String? {
-        val response = authorizedApolloClient.mutation(UpdateUserProfileMutation(dateOfBirth, firstName, Optional.present(null), lastName, phoneNumber)).execute()
+    suspend fun setUserInfo(dateOfBirth: Optional<String?>, firstName: Optional<String?>, lastName: Optional<String?>, phoneNumber: Optional<String?>, key:Optional<String?>): String? {
+        val response = authorizedApolloClient.mutation(UpdateUserProfileMutation(dateOfBirth, firstName, Optional.present(null), lastName, phoneNumber, key)).execute()
         val msg = response.data?.updateUserProfile?.msg
         return msg
     }
@@ -191,5 +191,17 @@ object ApolloClientService {
             return Result.Success(AnnouncementCreationRequestResult(response.data?.createNewAnnouncement?.id))
         }
         return Result.Error(IOException("Announcement couldn't be created"))
+    }
+
+    suspend fun sendOTP(email:String):Int?{
+        var response = apolloClient.mutation(SendOTPCodeMutation(email)).execute()
+        if(response.errors.isNullOrEmpty()) return response.data!!.sendOtpVerification!!.id!!.toInt()
+        return null
+    }
+
+    suspend fun getOTP(id:Int, code:String):String?{
+        var response = apolloClient.mutation(GetOTPResultMutation(Optional.present(id), Optional.present(code))).execute()
+        if(response.errors.isNullOrEmpty()) return response.data!!.getOtpVerification!!.msg
+        return null
     }
 }
