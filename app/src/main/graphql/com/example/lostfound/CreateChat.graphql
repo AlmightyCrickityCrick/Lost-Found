@@ -1,0 +1,7 @@
+mutation CreateChat($userId:ID!, $name:String, $key:String){
+    createChat(userId: $userId, name: $name, key: $key ){
+        chat{
+            id
+        }
+    }
+}

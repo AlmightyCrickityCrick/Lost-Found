@@ -79,11 +79,14 @@ object CryptographyService {
         return plaintext.commonToUtf8String()
     }
 
-    fun generateSymmetricKey(): String{
+    fun generateSymmetricKey(): Pair<String, String>{
         val keygen = KeyGenerator.getInstance("AES")
         keygen.init(256)
         val key: SecretKey = keygen.generateKey()
-        return Base64.getEncoder().encodeToString(key.encoded)
+        val cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING")
+        cipher.init(Cipher.ENCRYPT_MODE, key)
+        var iv = cipher.iv
+        return Pair(Base64.getEncoder().encodeToString(key.encoded), Base64.getEncoder().encodeToString(iv))
     }
 
     fun generateAssymetricKey():Pair<String, String>{

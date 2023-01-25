@@ -32,7 +32,7 @@ class ContactAdapter(var contacts:ArrayList<Contact>, var contactListener: Conta
 
     override fun getItemViewType(position: Int): Int {
         //TODO:State Number properly
-        if (contacts.get(position).state == 0) return VIEW_TYPE_ACTIVE else return VIEW_TYPE_INACTIVE
+        if (contacts.get(position).state == 1) return VIEW_TYPE_ACTIVE else return VIEW_TYPE_INACTIVE
     }
 
     private class ContactCardViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){

@@ -1,0 +1,5 @@
+mutation DeclineChat($chatId:ID!){
+    declineChat(chatId: $chatId){
+        msg
+    }
+}

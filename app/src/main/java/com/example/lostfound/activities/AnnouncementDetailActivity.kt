@@ -13,6 +13,7 @@ import com.example.lostfound.data.model.User
 import com.example.lostfound.databinding.ActivityAnnouncementDetailBinding
 import com.example.lostfound.databinding.ActivityCreateAnnouncementBinding
 import com.example.lostfound.utils.announcement.AnnouncementDetailController
+import com.example.lostfound.utils.chat.ChatListViewModel
 import com.example.lostfound.utils.crypto.CryptographyService
 import com.squareup.picasso.Picasso
 
@@ -51,7 +52,16 @@ class AnnouncementDetailActivity : AppCompatActivity() {
         user = binding.annUserUsername
         imageView = binding.annImg
 
-        btn_message = binding.btnAnnDetailMessage
+        var btn_message = binding.btnAnnDetailMessage
+
+        btn_message.setOnClickListener{
+            annDetail.user.publicKey?.let { it1 ->
+                ChatListViewModel().createChat(annDetail.user.user_id, annDetail.ann_title,
+                    it1, applicationContext)
+            }
+
+            Toast.makeText(this, "Chat created", Toast.LENGTH_SHORT).show()
+        }
 
 
         //Testing the ciphers

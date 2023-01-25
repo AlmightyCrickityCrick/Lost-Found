@@ -1,0 +1,16 @@
+query GetChat($id:ID!){
+    chat(id:$id){
+        id,
+        name,
+        messages{
+            sender{
+                id
+            }
+            text,
+            created
+        }
+        state,
+        initiator,
+        acceptor
+    }
+    }

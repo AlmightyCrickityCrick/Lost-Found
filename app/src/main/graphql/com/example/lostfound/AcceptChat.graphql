@@ -1,0 +1,6 @@
+mutation AcceptChat($chatId:ID!){
+    acceptChat(chatId: $chatId){
+        id,
+        key
+    }
+}

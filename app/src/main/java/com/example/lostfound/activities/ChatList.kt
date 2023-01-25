@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lostfound.R
 import com.example.lostfound.adapters.ContactAdapter
 import com.example.lostfound.data.DebugConstants
 import com.example.lostfound.data.model.Contact
 import com.example.lostfound.listeners.ContactListener
+import com.example.lostfound.utils.chat.ChatListViewModel
 import com.example.lostfound.utils.setMenuButton
 
 // TODO: Rename parameter arguments, choose names that match
@@ -30,7 +32,8 @@ class ChatList : Fragment(), ContactListener{
     private var param2: String? = null
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: ContactAdapter
-    var chats = DebugConstants.getContacts()
+    lateinit var chats :ArrayList<Contact>
+    lateinit var chatListViewModel:ChatListViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +42,10 @@ class ChatList : Fragment(), ContactListener{
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        chats = DebugConstants.getContacts()
+
+
     }
 
     override fun onCreateView(
@@ -46,15 +53,24 @@ class ChatList : Fragment(), ContactListener{
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_chat_list, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        chatListViewModel = ChatListViewModel()
+        chatListViewModel.getAllChats((activity as MainActivity).user.userId)
+
+        chatListViewModel.chatList.observe(viewLifecycleOwner, Observer{
+            val tmp = it ?: return@Observer
+            if(tmp.success!=null)
+                chats = tmp.success
+        })
+
         recyclerView = view.findViewById(R.id.chat_list_view)
         var toolbar = view.findViewById<Toolbar>(R.id.toolbar_chat_list)
         activity?.let { setMenuButton(toolbar, it) }
         initAdapter()
-
 
 
 
@@ -91,6 +107,7 @@ class ChatList : Fragment(), ContactListener{
     }
 
     override fun onAcceptClicked(contact: Contact) {
+
         onContactClicked(contact)
     }
 

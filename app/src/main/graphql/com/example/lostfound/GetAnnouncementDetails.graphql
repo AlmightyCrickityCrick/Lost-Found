@@ -15,7 +15,8 @@ query GetAnnouncementDetails($id:Int!){
                 firstName,
                 lastName
             },
-            rating
+            rating,
+            publicKey
         }
     }
 }
